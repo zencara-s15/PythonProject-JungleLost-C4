@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-import winsound
+from PIL import Image , ImageTk
 
 
 
@@ -15,7 +15,6 @@ window.title('Group C5 - Juggle Game')
 canvas = tk.Canvas(window)
 
 # Varaible
-
 game_start = tk.PhotoImage(file="img/bg_game.png")
 game_help = tk.PhotoImage(file="img/Group 5.png")
 game_level = tk.PhotoImage(file="img/back_level.png")
@@ -38,17 +37,15 @@ def gameShow(event):
     canvas.create_image(680,410,image=btn_exit_game, tags="exit")
 
 # show level game
-
 def levelGame(event):
     canvas.delete(all)
     canvas.create_image(680,372, image=game_level)
-    canvas.create_image(330,372, image=level1)
-    canvas.create_image(630,372, image=level2)
-    canvas.create_image(930,372, image=level3)
+    canvas.create_image(330,372, image=level1, tags="level1")
+    canvas.create_image(630,372, image=level2, tags="level2")
+    canvas.create_image(930,372, image=level3, tags="level3")
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 # show for how to play
-
 def gameHelp(event):
     canvas.delete("all")
     canvas.create_image(680, 372, image=game_help)
@@ -58,20 +55,33 @@ def gameHelp(event):
 def gameExit(event):
     window.destroy()
 
+# level game play
+def levelOne(event):
+    canvas.delete("all")
 
+def levelTwo(event):
+    canvas.delete("all")
+
+def levelThree(event):
+    canvas.delete("all")
+
+# create image
 canvas.create_image(680, 372, image=game_start)
 canvas.create_image(630,280, image=btn_start_game, tags="startgame")
 canvas.create_image(630,540,image=btn_help_game, tags="help")
 canvas.create_image(630,410,image=btn_exit_game, tags="exit")
-winsound.PlaySound("sounds/open.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+
 
 
 # Bind the button clicks to the corresponding functions
-
 canvas.tag_bind("startgame", "<Button-1>",levelGame )
 canvas.tag_bind("help", "<Button-1>", gameHelp)
 canvas.tag_bind("exit", "<Button-1>", gameExit)
 canvas.tag_bind("back", "<Button-1>", gameShow)
+
+canvas.tag_bind("level1", "<Button-1>", levelOne)
+canvas.tag_bind("level2", "<Button-1>", levelTwo)
+canvas.tag_bind("level3", "<Button-1>", levelThree)
 
 
 canvas.pack(expand=True, fill='both')
