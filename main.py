@@ -4,6 +4,7 @@ from PIL import Image , ImageTk
 
 
 
+
 # ---------------------------------------------------------------------------
 # #=> CONSTANT
 # ---------------------------------------------------------------------------
@@ -15,18 +16,18 @@ window.title('Group C5 - Juggle Game')
 canvas = tk.Canvas(window)
 
 # Varaible
-game_start = tk.PhotoImage(file="img/bg_game.png")
-game_help = tk.PhotoImage(file="img/Group 5.png")
-game_level = tk.PhotoImage(file="img/back_level.png")
+game_start = tk.PhotoImage(file="img/background/bg_game.png")
+game_help = tk.PhotoImage(file="img/background/Group 5.png")
+game_level = tk.PhotoImage(file="img/background/back_level.png")
 
-btn_start_game = tk.PhotoImage(file="img/start.png")
-btn_exit_game = tk.PhotoImage(file="img/exit.png")
-btn_help_game = tk.PhotoImage(file="img/help.png")
-btn_back_game = tk.PhotoImage(file="img/back.png")
+btn_start_game = tk.PhotoImage(file="img/menu/start.png")
+btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
+btn_help_game = tk.PhotoImage(file="img/menu/help.png")
+btn_back_game = tk.PhotoImage(file="img/menu/back.png")
 
-level1 = tk.PhotoImage(file="img/level1.png")
-level2 = tk.PhotoImage(file="img/level2.png")
-level3 = tk.PhotoImage(file="img/level3.png")
+level1 = tk.PhotoImage(file="img/menu/level1.png")
+level2 = tk.PhotoImage(file="img/menu/level2.png")
+level3 = tk.PhotoImage(file="img/menu/level3.png")
 
 # Show start game
 def gameShow(event):
@@ -70,7 +71,6 @@ canvas.create_image(680, 372, image=game_start)
 canvas.create_image(630,280, image=btn_start_game, tags="startgame")
 canvas.create_image(630,540,image=btn_help_game, tags="help")
 canvas.create_image(630,410,image=btn_exit_game, tags="exit")
-
 
 
 # Bind the button clicks to the corresponding functions
