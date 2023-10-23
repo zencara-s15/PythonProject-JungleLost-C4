@@ -62,8 +62,6 @@ def gameExit(event):
 def levelOne(event):
     canvas.delete("all")
 
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
-
 
 def levelTwo(event):
     canvas.delete("all")
