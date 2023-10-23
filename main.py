@@ -4,6 +4,7 @@ from PIL import Image , ImageTk
 
 
 
+
 # ---------------------------------------------------------------------------
 # #=> CONSTANT
 # ---------------------------------------------------------------------------
@@ -15,15 +16,22 @@ window.title('Group C5 - Juggle Game')
 canvas = tk.Canvas(window)
 
 # Varaible
+<<<<<<< HEAD
 game_start = tk.PhotoImage(file="img/bg_game.png")
-game_help = tk.PhotoImage(file="img/Group 5.png")
+game_help = tk.PhotoImage(file="img/Game_help.png")
 game_level = tk.PhotoImage(file="img/back_level.png")
+=======
+game_start = tk.PhotoImage(file="img/background/bg_game.png")
+game_help = tk.PhotoImage(file="img/background/Group 5.png")
+game_level = tk.PhotoImage(file="img/background/back_level.png")
+>>>>>>> 0040937b46d3b15257486cb1e7d677c13332a2a3
 
-btn_start_game = tk.PhotoImage(file="img/start.png")
-btn_exit_game = tk.PhotoImage(file="img/exit.png")
-btn_help_game = tk.PhotoImage(file="img/help.png")
-btn_back_game = tk.PhotoImage(file="img/back.png")
+btn_start_game = tk.PhotoImage(file="img/menu/start.png")
+btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
+btn_help_game = tk.PhotoImage(file="img/menu/help.png")
+btn_back_game = tk.PhotoImage(file="img/menu/back.png")
 
+<<<<<<< HEAD
 level1 = tk.PhotoImage(file="img/level1.png")
 bg_l1 = tk.PhotoImage(file="L1-img/Bg.png")
 apple_l1 = tk.PhotoImage(file="L1-img/grass.png")
@@ -31,6 +39,13 @@ apple_l1 = tk.PhotoImage(file="L1-img/grass.png")
 
 level2 = tk.PhotoImage(file="img/level2.png")
 level3 = tk.PhotoImage(file="img/level3.png")
+=======
+level1 = tk.PhotoImage(file="img/menu/level1.png")
+level2 = tk.PhotoImage(file="img/menu/level2.png")
+level3 = tk.PhotoImage(file="img/menu/level3.png")
+
+ground = tk.PhotoImage(file="img/robar.png")
+>>>>>>> 27fc8572f5bade01e44dcd456657e9037569cedf
 
 # Show start game
 def gameShow(event):
@@ -53,7 +68,7 @@ def levelGame(event):
 def gameHelp(event):
     canvas.delete("all")
     canvas.create_image(680, 372, image=game_help)
-    canvas.create_image(140, 200, image=btn_back_game, tags="back")
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 # close game
 def gameExit(event):
@@ -64,11 +79,18 @@ def levelOne(event):
     canvas.delete("all")
     canvas.create_image(500,400, image=bg_l1)
 
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+
+
 def levelTwo(event):
     canvas.delete("all")
 
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+
 def levelThree(event):
     canvas.delete("all")
+
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 # create image
 canvas.create_image(680, 372, image=game_start)
@@ -77,12 +99,11 @@ canvas.create_image(630,540,image=btn_help_game, tags="help")
 canvas.create_image(630,410,image=btn_exit_game, tags="exit")
 
 
-
 # Bind the button clicks to the corresponding functions
-canvas.tag_bind("startgame", "<Button-1>",levelGame )
 canvas.tag_bind("help", "<Button-1>", gameHelp)
 canvas.tag_bind("exit", "<Button-1>", gameExit)
 canvas.tag_bind("back", "<Button-1>", gameShow)
+canvas.tag_bind("startgame", "<Button-1>",levelGame )
 
 canvas.tag_bind("level1", "<Button-1>", levelOne)
 canvas.tag_bind("level2", "<Button-1>", levelTwo)
