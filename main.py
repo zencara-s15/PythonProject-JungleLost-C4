@@ -25,6 +25,10 @@ btn_help_game = tk.PhotoImage(file="img/help.png")
 btn_back_game = tk.PhotoImage(file="img/back.png")
 
 level1 = tk.PhotoImage(file="img/level1.png")
+bg_l1 = tk.PhotoImage(file="L1-img/Bg.png")
+apple_l1 = tk.PhotoImage(file="L1-img/grass.png")
+
+
 level2 = tk.PhotoImage(file="img/level2.png")
 level3 = tk.PhotoImage(file="img/level3.png")
 
@@ -58,6 +62,7 @@ def gameExit(event):
 # level game play
 def levelOne(event):
     canvas.delete("all")
+    canvas.create_image(500,400, image=bg_l1)
 
 def levelTwo(event):
     canvas.delete("all")
