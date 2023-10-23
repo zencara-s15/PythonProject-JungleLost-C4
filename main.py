@@ -83,6 +83,5 @@ canvas.tag_bind("level1", "<Button-1>", levelOne)
 canvas.tag_bind("level2", "<Button-1>", levelTwo)
 canvas.tag_bind("level3", "<Button-1>", levelThree)
 
-
 canvas.pack(expand=True, fill='both')
 window.mainloop()
