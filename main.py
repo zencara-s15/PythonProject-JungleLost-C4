@@ -17,7 +17,7 @@ canvas = tk.Canvas(window, width=SCREEN_WIDTH, height=SCREEN_HEIGHT, scrollregio
 canvas.pack()
 # Varaible
 game_start = tk.PhotoImage(file="img/background/bg_game.png")
-game_help = tk.PhotoImage(file="img/background/Group 5.png")
+game_help = tk.PhotoImage(file="img/background/Game_help.png")
 game_level = tk.PhotoImage(file="img/background/back_level.png")
 
 btn_start_game = tk.PhotoImage(file="img/menu/start.png")
