@@ -16,15 +16,9 @@ window.title('Group C5 - Juggle Game')
 canvas = tk.Canvas(window)
 
 # Varaible
-<<<<<<< HEAD
-game_start = tk.PhotoImage(file="img/bg_game.png")
-game_help = tk.PhotoImage(file="img/Game_help.png")
-game_level = tk.PhotoImage(file="img/back_level.png")
-=======
 game_start = tk.PhotoImage(file="img/background/bg_game.png")
-game_help = tk.PhotoImage(file="img/background/Group 5.png")
+game_help = tk.PhotoImage(file="img/background/Game_help.png")
 game_level = tk.PhotoImage(file="img/background/back_level.png")
->>>>>>> 0040937b46d3b15257486cb1e7d677c13332a2a3
 
 btn_start_game = tk.PhotoImage(file="img/menu/start.png")
 btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
