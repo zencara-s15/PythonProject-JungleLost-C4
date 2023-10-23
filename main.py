@@ -16,36 +16,20 @@ window.title('Group C5 - Juggle Game')
 canvas = tk.Canvas(window)
 
 # Varaible
-<<<<<<< HEAD
-game_start = tk.PhotoImage(file="img/bg_game.png")
-game_help = tk.PhotoImage(file="img/Game_help.png")
-game_level = tk.PhotoImage(file="img/back_level.png")
-=======
 game_start = tk.PhotoImage(file="img/background/bg_game.png")
 game_help = tk.PhotoImage(file="img/background/Group 5.png")
 game_level = tk.PhotoImage(file="img/background/back_level.png")
->>>>>>> 0040937b46d3b15257486cb1e7d677c13332a2a3
 
 btn_start_game = tk.PhotoImage(file="img/menu/start.png")
 btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
 btn_help_game = tk.PhotoImage(file="img/menu/help.png")
 btn_back_game = tk.PhotoImage(file="img/menu/back.png")
 
-<<<<<<< HEAD
-level1 = tk.PhotoImage(file="img/level1.png")
-bg_l1 = tk.PhotoImage(file="L1-img/Bg.png")
-apple_l1 = tk.PhotoImage(file="L1-img/grass.png")
-
-
-level2 = tk.PhotoImage(file="img/level2.png")
-level3 = tk.PhotoImage(file="img/level3.png")
-=======
 level1 = tk.PhotoImage(file="img/menu/level1.png")
 level2 = tk.PhotoImage(file="img/menu/level2.png")
 level3 = tk.PhotoImage(file="img/menu/level3.png")
 
 ground = tk.PhotoImage(file="img/robar.png")
->>>>>>> 27fc8572f5bade01e44dcd456657e9037569cedf
 
 # Show start game
 def gameShow(event):
@@ -77,9 +61,6 @@ def gameExit(event):
 # level game play
 def levelOne(event):
     canvas.delete("all")
-    canvas.create_image(500,400, image=bg_l1)
-
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 
 def levelTwo(event):
