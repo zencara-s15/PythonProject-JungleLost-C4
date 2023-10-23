@@ -12,40 +12,32 @@ SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 700
 window = tk.Tk()
 window.geometry(str(SCREEN_WIDTH)+"x"+str(SCREEN_HEIGHT))
-window.title('Group C5 - Juggle Game')
-canvas = tk.Canvas(window)
-
+window.title('Group C4 - Juggle Game')
+canvas = tk.Canvas(window, width=SCREEN_WIDTH, height=SCREEN_HEIGHT, scrollregion=(0,0,3800,5000))
+canvas.pack()
 # Varaible
-<<<<<<< HEAD
-game_start = tk.PhotoImage(file="img/bg_game.png")
-game_help = tk.PhotoImage(file="img/Game_help.png")
-game_level = tk.PhotoImage(file="img/back_level.png")
-=======
 game_start = tk.PhotoImage(file="img/background/bg_game.png")
 game_help = tk.PhotoImage(file="img/background/Group 5.png")
 game_level = tk.PhotoImage(file="img/background/back_level.png")
->>>>>>> 0040937b46d3b15257486cb1e7d677c13332a2a3
 
 btn_start_game = tk.PhotoImage(file="img/menu/start.png")
 btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
 btn_help_game = tk.PhotoImage(file="img/menu/help.png")
 btn_back_game = tk.PhotoImage(file="img/menu/back.png")
 
-<<<<<<< HEAD
-level1 = tk.PhotoImage(file="img/level1.png")
-bg_l1 = tk.PhotoImage(file="L1-img/Bg.png")
-apple_l1 = tk.PhotoImage(file="L1-img/grass.png")
-
-
-level2 = tk.PhotoImage(file="img/level2.png")
-level3 = tk.PhotoImage(file="img/level3.png")
-=======
 level1 = tk.PhotoImage(file="img/menu/level1.png")
 level2 = tk.PhotoImage(file="img/menu/level2.png")
 level3 = tk.PhotoImage(file="img/menu/level3.png")
 
 ground = tk.PhotoImage(file="img/robar.png")
->>>>>>> 27fc8572f5bade01e44dcd456657e9037569cedf
+
+# ________level2________
+
+bg_level2=tk.PhotoImage(file="img/background/bgL2.png")
+
+grass_level2 = tk.PhotoImage(file="img/grassl2.png")
+
+
 
 # Show start game
 def gameShow(event):
@@ -77,13 +69,31 @@ def gameExit(event):
 # level game play
 def levelOne(event):
     canvas.delete("all")
-    canvas.create_image(500,400, image=bg_l1)
+    # canvas.create_image(500,400, image=bg_l1)
 
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 
 def levelTwo(event):
     canvas.delete("all")
+    canvas.create_image(600,350, image=bg_level2)
+    canvas.create_image(1950,350, image=bg_level2)
+    canvas.create_image(3300,350, image=bg_level2)
+    #scrollbar
+    scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
+    canvas.configure(xscrollcommand=scrollbar_bottom.set)
+    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+
+    canvas.create_image(300, 150, image=grass_level2)
+    canvas.create_image(500, 350, image=grass_level2)
+    canvas.create_image(700, 550, image=grass_level2)
+    canvas.create_image(1100,550, image=grass_level2)
+    canvas.create_image(900, 350, image=grass_level2)
+    canvas.create_image(750, 150, image=grass_level2)
+    canvas.create_image(1200, 150, image=grass_level2)
+    canvas.create_image(1400, 350, image=grass_level2)
+    canvas.create_image(1600, 550, image=grass_level2)
+    canvas.create_image(1600, 150, image=grass_level2)
 
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
