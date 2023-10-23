@@ -62,7 +62,8 @@ bg = ImageTk.PhotoImage(bg_file)
 
 # ---------------- this place for create platform image for all lvl
 
-
+plaform_file = Image.open("bg.jpg")  #this is for condition test only
+plaform = ImageTk.PhotoImage(plaform_file)
 # ---------------- this place for create enemies image for all lvl
 
 
@@ -178,13 +179,11 @@ window.bind("<Key>", start_move)
 window.bind("<KeyRelease>", stop_move)
 # ----------------------------------------------
 
-
 # create image menu
 canvas.create_image(680, 372, image=game_start)
 canvas.create_image(630,280, image=btn_start_game, tags="startgame")
 canvas.create_image(630,540,image=btn_help_game, tags="help")
 canvas.create_image(630,410,image=btn_exit_game, tags="exit")
-
 
 # Bind the button clicks to the corresponding functions
 canvas.tag_bind("startgame", "<Button-1>",levelGame )
@@ -195,7 +194,6 @@ canvas.tag_bind("back", "<Button-1>", gameShow)
 canvas.tag_bind("level1", "<Button-1>", levelOne)
 canvas.tag_bind("level2", "<Button-1>", levelTwo)
 canvas.tag_bind("level3", "<Button-1>", levelThree)
-
 
 canvas.pack(expand=True, fill='both')
 window.mainloop()
