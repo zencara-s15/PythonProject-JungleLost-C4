@@ -108,7 +108,8 @@ def levelOne(event):
     canvas.create_image(700,350,image=bg)
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
-
+    
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 def levelTwo(event):
     canvas.delete("all")
