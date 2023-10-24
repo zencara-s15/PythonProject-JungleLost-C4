@@ -19,28 +19,48 @@ keyPressed = []
 # ---------------------------------------------------------------------------
 # #=> CONSTANT
 # ---------------------------------------------------------------------------
+
 SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 700
 window = tk.Tk()
 window.geometry(str(SCREEN_WIDTH)+"x"+str(SCREEN_HEIGHT))
-window.title('Group C5 - Juggle Game')
-canvas = tk.Canvas(window)
-
+window.title('Group C4 - Juggle Game')
+canvas = tk.Canvas(window, width=SCREEN_WIDTH, height=SCREEN_HEIGHT, scrollregion=(0,0,3800,5000))
+canvas.pack()
 # Varaible
 game_start = tk.PhotoImage(file="img/background/bg_game.png")
 game_help = tk.PhotoImage(file="img/background/Game_help.png")
 game_level = tk.PhotoImage(file="img/background/back_level.png")
+# -----------------------back-ground--------------
+game_start = tk.PhotoImage(file="img/background/bg_game.png")
+game_help = tk.PhotoImage(file="img/background/Game_help.png")
+game_level = tk.PhotoImage(file="img/background/back_level.png")
+game_win = tk.PhotoImage(file="img/background/wingame.png")
+game_lose = tk.PhotoImage(file="img/background/losegame.png")
+game_i = tk.PhotoImage(file="img/menu/back.png")
+
+# ----------------------buttons-----------------------
 
 btn_start_game = tk.PhotoImage(file="img/menu/start.png")
 btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
 btn_help_game = tk.PhotoImage(file="img/menu/help.png")
 btn_back_game = tk.PhotoImage(file="img/menu/back.png")
+btn_back_game = tk.PhotoImage(file="img/menu/come_back.png")
+btn_restart_game = tk.PhotoImage(file="img/menu/restart.png")
+btn_next_game = tk.PhotoImage(file="img/menu/next.png")
+
+
+# ---------------------levelGame--------------------------
 
 level1 = tk.PhotoImage(file="img/menu/level1.png")
 level2 = tk.PhotoImage(file="img/menu/level2.png")
 level3 = tk.PhotoImage(file="img/menu/level3.png")
 
 ground = tk.PhotoImage(file="img/robar.png")
+# -------------------------------------------------------------------------
+# ----------------------funtions-------------------------------------------
+# -------------------------------------------------------------------------
+
 
 # Show start game
 # CHARACTER test for all lvl
@@ -62,8 +82,10 @@ player = canvas.create_image(50, 650, image=play)
 bg_file = Image.open("bg.jpg")
 bg = ImageTk.PhotoImage(bg_file)
 
+bg_level2=tk.PhotoImage(file="img/background/bgL2.png")
 
 # ---------------- this place for create platform image for all lvl
+grass_level2 = tk.PhotoImage(file="img/grassl2.png")
 
 plaform_file = Image.open("bg.jpg")  #this is for condition test only
 plaform = ImageTk.PhotoImage(plaform_file)
@@ -72,12 +94,15 @@ plaform = ImageTk.PhotoImage(plaform_file)
 
 
 # ---------------- this place for create fruits image for all lvl
+apple_level2_file = Image.open("img/enemies/apple.png")
+apple_level2_size = apple_level2_file.resize((50,50))
+apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
 
 
 # show start game
 def gameShow(event):
-
-    canvas.create_image(680, 372, image=game_start)
+    # canvas.delete("all")
+    canvas.create_image(680, 350, image=game_start)
     canvas.create_image(680,280, image=btn_start_game, tags="startgame")
     canvas.create_image(680,540,image=btn_help_game, tags="help")
     canvas.create_image(680,410,image=btn_exit_game, tags="exit")
@@ -101,7 +126,48 @@ def gameHelp(event):
 def gameExit(event):
     window.destroy()
 
-# level game play
+# --------------------------win----------------------------
+def winOne(event):
+    canvas.delete("all")
+    canvas.create_image(590,300, image=game_win)
+    canvas.create_image(430,550, image=btn_back_game, tags="back")
+
+    canvas.create_image(630,550, image=btn_restart_game, tags="restartOne")
+    canvas.create_image(830,550, image=btn_next_game, tags="nextTwo")
+  
+def winTwo(event):
+    canvas.delete("all")
+    canvas.create_image(590,300, image=game_win)
+    canvas.create_image(430,550, image=btn_back_game, tags="back")
+
+    canvas.create_image(630,550, image=btn_restart_game, tags="restartTwo")
+    canvas.create_image(830,550, image=btn_next_game, tags="nextThree")    
+    
+def winThree(event):
+    canvas.delete("all")
+    canvas.create_image(590,300, image=game_win)
+    canvas.create_image(430,550, image=btn_back_game, tags="back") 
+    canvas.create_image(630,550, image=btn_restart_game, tags="restartThree")
+
+# -------------------------lose---------------------
+
+def loseOne(event):
+    canvas.delete("all")
+    canvas.create_image(650,361,image=game_lose)
+    canvas.create_image(750,550, image=btn_restart_game, tags="restartOne")
+
+def loseTwo(event):
+    canvas.delete("all")
+    canvas.create_image(650,361,image=game_lose)
+    canvas.create_image(750,550, image=btn_restart_game, tags="restartTwo")
+
+def lsoeThree(event):
+    canvas.delete("all")
+    canvas.create_image(650,361,image=game_lose)
+    canvas.create_image(750,550, image=btn_restart_game, tags="restartThree")
+
+
+# create image start
 def levelOne(event):
     canvas.delete("all") 
     global player
@@ -113,25 +179,58 @@ def levelOne(event):
 
 def levelTwo(event):
     canvas.delete("all")
+    canvas.delete("all")
     global player
-    canvas.create_image(700,350,image=bg)
+    canvas.create_image(600,280, image=bg_level2)
+    canvas.create_image(1950,280, image=bg_level2)
+    canvas.create_image(3300,280, image=bg_level2)
+    canvas.create_rectangle(0,630,3800,700,fill="white",tags="GROUND")
     player = canvas.create_image(50, 100, image=play)
-    canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
+    #scrollbar
+    scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
+    canvas.configure(xscrollcommand=scrollbar_bottom.set)
+    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+    #_______________wall____________________________
+    canvas.create_image(300, 150, image=grass_level2,  tags="GROUND")
+    canvas.create_image(500, 350, image=grass_level2,  tags="GROUND")
+    canvas.create_image(700, 550, image=grass_level2,  tags="GROUND")
+    canvas.create_image(1100,550, image=grass_level2,  tags="GROUND")
+    canvas.create_image(900, 350, image=grass_level2,  tags="GROUND")
+    canvas.create_image(750, 150, image=grass_level2,  tags="GROUND")
+    canvas.create_image(1200, 150, image=grass_level2, tags="GROUND")
+    canvas.create_image(1400, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(1600, 550, image=grass_level2, tags="GROUND")
+    canvas.create_image(2000, 550, image=grass_level2, tags="GROUND")
+    canvas.create_image(1800, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(1600, 150, image=grass_level2, tags="GROUND")
+    canvas.create_image(2000, 150, image=grass_level2, tags="GROUND")
+    canvas.create_image(2200, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(2400, 550, image=grass_level2, tags="GROUND")
+    canvas.create_image(2800, 550, image=grass_level2, tags="GROUND")
+    canvas.create_image(2600, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(2400, 150, image=grass_level2, tags="GROUND")
+    canvas.create_image(2800, 150, image=grass_level2, tags="GROUND")
+    canvas.create_image(3000, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(3200, 550, image=grass_level2, tags="GROUND")
+    canvas.create_image(3600, 550, image=grass_level2, tags="GROUND")
+    canvas.create_image(3400, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(3200, 150, image=grass_level2, tags="GROUND")
+    canvas.create_image(3600, 150, image=grass_level2, tags="GROUND")
 
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+    #______________________apple_level2______________,tags="GROUND"________________
+    canvas.create_image(300,100, image =apple_leveL2)
 
 def levelThree(event):
     canvas.delete("all")
     global player
     canvas.create_image(700,350,image=bg)
     player = canvas.create_image(50, 100, image=play)
+
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
 
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 # create image
-
-# ----
 
 # ------------- gravity function and movement ---------------------
 def check_movement(dx=0, dy=0, checkGround=False):
@@ -197,15 +296,32 @@ canvas.create_image(630,280, image=btn_start_game, tags="startgame")
 canvas.create_image(630,540,image=btn_help_game, tags="help")
 canvas.create_image(630,410,image=btn_exit_game, tags="exit")
 
+# ------------------------------------------------------------------------
 # Bind the button clicks to the corresponding functions
+# ------------------------------------------------------------------------
+
 canvas.tag_bind("help", "<Button-1>", gameHelp)
 canvas.tag_bind("exit", "<Button-1>", gameExit)
 canvas.tag_bind("back", "<Button-1>", gameShow)
 canvas.tag_bind("startgame", "<Button-1>",levelGame )
 
+# -------------------restart-game---------------
+
+canvas.tag_bind("restartOne", "<Button-1>",levelOne )
+canvas.tag_bind("restartTwo", "<Button-1>",levelTwo )
+canvas.tag_bind("restartThree", "<Button-1>",levelThree )
+
+# ------------------next-game------------------------
+
+canvas.tag_bind("nextTwo", "<Button-1>",levelTwo )
+canvas.tag_bind("nextThree", "<Button-1>",levelThree )
+
+# ----------------level-game------------------------
+
 canvas.tag_bind("level1", "<Button-1>", levelOne)
 canvas.tag_bind("level2", "<Button-1>", levelTwo)
 canvas.tag_bind("level3", "<Button-1>", levelThree)
+
 
 canvas.pack(expand=True, fill='both')
 window.mainloop()
