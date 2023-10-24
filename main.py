@@ -172,7 +172,7 @@ def lsoeThree(event):
 
 
 # create image start
-
+def levelOne(event):
     canvas.delete("all") 
     global player
     canvas.create_image(700,350,image=bg)
