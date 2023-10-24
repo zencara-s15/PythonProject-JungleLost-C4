@@ -5,7 +5,7 @@ import time
 
 # player ----
 GRAVITY_FORCE = 10
-JUMP_FORCE = 25
+JUMP_FORCE = 35
 SPEED = 10
 TIMED_LOOP = 5
 
@@ -99,13 +99,18 @@ snake_level1 = tk.PhotoImage(file="img/levelOne_image/snake.png")
 
 # ---------------- this place for create enemies image for all lvl
 
-
+enemies_file = Image.open("enemy.png")
+enemies_size = enemies_file.resize((50,50))
+enemy =ImageTk.PhotoImage(enemies_size)
 
 # ---------------- this place for create fruits image for all lvl
 apple_level2_file = Image.open("img/enemies/apple.png")
 apple_level2_size = apple_level2_file.resize((50,50))
 apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
+
+
 apple_level1 = tk.PhotoImage(file="img/levelOne_image/apple.png")
+
 
 
 # show start game
@@ -165,6 +170,16 @@ def winThree(event):
 
 # -------------------------lose---------------------
 
+# ----------------------------------------------------------------------------------
+
+def gameOver():
+    canvas.delete("all")
+    canvas.create_image(650,361,image=game_lose)
+    canvas.create_image(750,550, image=btn_restart_game, tags="restartOne")
+    
+# ----------------------------------------------------------------------------------
+
+
 def loseOne(event):
     canvas.delete("all")
     canvas.create_image(650,361,image=game_lose)
@@ -217,27 +232,34 @@ def levelOne(event):
     canvas.create_image(3400, 500, image=grass_level1, tags="GROUND")
 
     # fiuits
-    canvas.create_image(840,410, image=apple_level1, tags="GROUND")
-    canvas.create_image(3000,160, image=apple_level1, tags="GROUND")
-    canvas.create_image(1700,210, image=apple_level1, tags="GROUND")
-    canvas.create_image(2300,410, image=apple_level1, tags="GROUND")
-    
+    global fruit_id 
 
+    fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
+   
     global player
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
     
+# ----------------------------------------------------------------------------------
+
+    global enemies_id
+    enemies_id =canvas.create_image(200,410, image=enemy, tags="ENEMIES")
+    
+# ----------------------------------------------------------------------------------
+
+
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 
 def levelTwo(event):
     canvas.delete("all")
-    global player
     canvas.create_image(600,280, image=bg_level2)
     canvas.create_image(1950,280, image=bg_level2)
     canvas.create_image(3300,280, image=bg_level2)
-    canvas.create_rectangle(0,630,3800,700,fill="white",tags="GROUND")
-    player = canvas.create_image(50, 100, image=play)
+
     #scrollbar
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
@@ -269,21 +291,64 @@ def levelTwo(event):
     canvas.create_image(3200, 150, image=grass_level2, tags="GROUND")
     canvas.create_image(3600, 150, image=grass_level2, tags="GROUND")
 
-    #______________________apple_level2______________,tags="GROUND"________________
-    canvas.create_image(300,100, image =apple_leveL2)
-    canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
+     # fiuits
+    global fruit_id 
+
+    fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
+
+    # player 
+    global player
+    player = canvas.create_image(50, 100, image=play)
+    canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
+
+    # back btn 
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+   
 
 def levelThree(event):
     canvas.delete("all")
+
+
+    # fiuits
+    global fruit_id 
+
+    fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
+
+    # player 
     global player
-    canvas.create_image(700,350,image=bg)
     player = canvas.create_image(50, 100, image=play)
+    canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
 
-    canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
-
+    # back btn 
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
-# create image
+
+# FUNCTION__________________eat fruits 
+def eat_fruit():
+    coord = canvas.coords(player)
+    fruits = canvas.find_withtag("FRUITS")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + play.width(),coord[1] + play.height())
+    for fr in fruits:
+        if fr in overlap:
+            return fr
+    return 0
+
+# FUNCTION___________________ENEMIES​​ AND LOST CONDITIION
+# def enemies():
+def meet_enemies():
+    coord = canvas.coords(player)
+    enemies = canvas.find_withtag("ENEMIES")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + play.width(),coord[1] + play.height())
+    for en in enemies:
+        if en in overlap:
+            return en
+    return 0
 
 # ------------- gravity function and movement ---------------------
 def check_movement(dx=0, dy=0, checkGround=False):
@@ -299,8 +364,23 @@ def check_movement(dx=0, dy=0, checkGround=False):
     for ground in grounds:
         if ground in overlap:
             return False
+        
+    global fruit_id
+    fruit_id = eat_fruit()
+
+    if fruit_id > 0:
+        coord = canvas.coords(fruit_id)
+        canvas.delete(fruit_id)
+
+    global enemies_id
+    enemies_id = meet_enemies()
+    if enemies_id > 0:
+        coord = canvas.coords(enemies_id)
+        canvas.itemconfig(player,image=enemy)
+        gameOver()
     return True
-    
+
+
 def jump(force):
     if force > 0:
         if check_movement(0, -force):
@@ -341,6 +421,8 @@ def stop_move(event):
 gravity()
 window.bind("<Key>", start_move)
 window.bind("<KeyRelease>", stop_move)
+
+
 # ----------------------------------------------
 
 # create image menu
