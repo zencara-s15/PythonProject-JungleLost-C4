@@ -48,8 +48,6 @@ btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
 btn_help_game = tk.PhotoImage(file="img/menu/help.png")
 btn_back_game = tk.PhotoImage(file="img/menu/back.png")
 btn_back_game = tk.PhotoImage(file="img/menu/come_back.png")
-btn_restart_game = tk.PhotoImage(file="img/menu/restart.png")
-btn_next_game = tk.PhotoImage(file="img/menu/next.png")
 
 
 # ---------------------levelGame--------------------------
@@ -120,7 +118,7 @@ def levelGame(event):
 
 # show for how to play
 def gameHelp(event):
-    canvas.delete("all")
+    # canvas.delete("all")
     canvas.create_image(680, 372, image=game_help)
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
@@ -130,62 +128,28 @@ def gameExit(event):
 
 # --------------------------win----------------------------
 def winOne(event):
-    canvas.delete("all")
     canvas.create_image(590,300, image=game_win)
-    canvas.create_image(430,550, image=btn_back_game, tags="back")
-    canvas.create_image(630,550, image=btn_restart_game, tags="restartOne")
-    canvas.create_image(830,550, image=btn_next_game, tags="nextTwo")
-def gameRestart():
-   global isStart
-   isStart = True
-  
-def winTwo(event):
-    canvas.delete("all")
-    canvas.create_image(590,300, image=game_win)
-    canvas.create_image(430,550, image=btn_back_game, tags="back")
-
-    canvas.create_image(630,550, image=btn_restart_game, tags="restartTwo")
-    canvas.create_image(830,550, image=btn_next_game, tags="nextThree")    
-    
-def winThree(event):
-    canvas.delete("all")
-    canvas.create_image(590,300, image=game_win)
-    canvas.create_image(430,550, image=btn_back_game, tags="back") 
-    canvas.create_image(630,550, image=btn_restart_game, tags="restartThree")
+    canvas.create_image(620,550, image=btn_back_game, tags="back1")
 
 # -------------------------lose---------------------
 
 def loseOne(event):
-    canvas.delete("all")
     canvas.create_image(650,361,image=game_lose)
-    canvas.create_image(750,550, image=btn_restart_game, tags="restartOne")
-    canvas.create_image(430,550, image=btn_back_game, tags="back")
-
-def loseTwo(event):
-    canvas.delete("all")
-    canvas.create_image(650,361,image=game_lose)
-    canvas.create_image(750,550, image=btn_restart_game, tags="restartTwo")
-
-def lsoeThree(event):
-    canvas.delete("all")
-    canvas.create_image(650,361,image=game_lose)
-    canvas.create_image(750,550, image=btn_restart_game, tags="restartThree")
-
+    canvas.create_image(640,550, image=btn_back_game, tags="back1")
 
 # create image start
 def levelOne(event):
     global player
-    canvas.delete("all") 
-    
+    canvas.delete("all")
     canvas.create_image(700,350,image=bg)
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
     
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+    canvas.create_image(100, 100, image=btn_back_game, tags="back1")
+
 
 def levelTwo(event):
     global player
-    canvas.delete("all")
     canvas.create_image(600,280, image=bg_level2)
     canvas.create_image(1950,280, image=bg_level2)
     canvas.create_image(3300,280, image=bg_level2)
@@ -225,17 +189,18 @@ def levelTwo(event):
     #______________________apple_level2______________,tags="GROUND"________________
     canvas.create_image(300,100, image =apple_leveL2)
 
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+    canvas.create_image(100, 100, image=btn_back_game, tags="back1")
+
 
 def levelThree(event):
-    canvas.delete("all")
     global player
+    canvas.delete("all")
     canvas.create_image(700,350,image=bg)
     player = canvas.create_image(50, 100, image=play)
 
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
 
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+    canvas.create_image(100, 100, image=btn_back_game, tags="back1")
 
 # create image
 
@@ -313,22 +278,14 @@ canvas.tag_bind("exit", "<Button-1>", gameExit)
 canvas.tag_bind("back", "<Button-1>", gameShow)
 canvas.tag_bind("startgame", "<Button-1>",levelGame )
 
-# -------------------restart-game---------------
-
-canvas.tag_bind("restartOne", "<Button-1>",levelOne )
-canvas.tag_bind("restartTwo", "<Button-1>",levelTwo )
-canvas.tag_bind("restartThree", "<Button-1>",levelThree )
-
-# ------------------next-game------------------------
-
-canvas.tag_bind("nextTwo", "<Button-1>",levelTwo )
-canvas.tag_bind("nextThree", "<Button-1>",levelThree )
-
 # ----------------level-game------------------------
 
 canvas.tag_bind("level1", "<Button-1>", levelOne)
 canvas.tag_bind("level2", "<Button-1>", levelTwo)
 canvas.tag_bind("level3", "<Button-1>", levelThree)
+
+canvas.tag_bind("back2", "<Button-1>", loseOne)
+canvas.tag_bind("back1", "<Button-1>", levelGame)
 
 
 canvas.pack(expand=True, fill='both')
