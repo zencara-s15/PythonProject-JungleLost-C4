@@ -145,7 +145,7 @@ def levelOne(event):
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
     
-    canvas.create_image(100, 100, image=btn_back_game, tags="back1")
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 
 def levelTwo(event):
@@ -189,7 +189,7 @@ def levelTwo(event):
     #______________________apple_level2______________,tags="GROUND"________________
     canvas.create_image(300,100, image =apple_leveL2)
 
-    canvas.create_image(100, 100, image=btn_back_game, tags="back1")
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 
 def levelThree(event):
@@ -200,7 +200,7 @@ def levelThree(event):
 
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
 
-    canvas.create_image(100, 100, image=btn_back_game, tags="back1")
+    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 # create image
 
