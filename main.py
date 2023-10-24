@@ -24,7 +24,7 @@ SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 700
 window = tk.Tk()
 window.geometry(str(SCREEN_WIDTH)+"x"+str(SCREEN_HEIGHT))
-window.title('Group C5 - Juggle Game')
+window.title('Group C4 - Juggle Game')
 canvas = tk.Canvas(window)
 
 # Varaible
@@ -90,7 +90,7 @@ plaform = ImageTk.PhotoImage(plaform_file)
 
 # show start game
 def gameShow(event):
-    canvas.delete("all")
+
     canvas.create_image(680, 350, image=game_start)
     canvas.create_image(680,280, image=btn_start_game, tags="startgame")
     canvas.create_image(680,540,image=btn_help_game, tags="help")
