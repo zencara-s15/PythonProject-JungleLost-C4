@@ -2,12 +2,10 @@ import tkinter as tk
 from tkinter import *
 from PIL import Image , ImageTk
 
-
-
-
 # ---------------------------------------------------------------------------
 # #=> CONSTANT
 # ---------------------------------------------------------------------------
+
 SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 700
 window = tk.Tk()
@@ -22,6 +20,7 @@ game_help = tk.PhotoImage(file="img/background/Game_help.png")
 game_level = tk.PhotoImage(file="img/background/back_level.png")
 game_win = tk.PhotoImage(file="img/background/wingame.png")
 game_lose = tk.PhotoImage(file="img/background/losegame.png")
+game_i = tk.PhotoImage(file="img/menu/back.png")
 
 # ----------------------buttons-----------------------
 
@@ -31,7 +30,7 @@ btn_help_game = tk.PhotoImage(file="img/menu/help.png")
 btn_back_game = tk.PhotoImage(file="img/menu/come_back.png")
 btn_restart_game = tk.PhotoImage(file="img/menu/restart.png")
 btn_next_game = tk.PhotoImage(file="img/menu/next.png")
-back_game = tk.PhotoImage(file="img/menu/back.png")
+
 
 # ---------------------levelGame--------------------------
 
@@ -74,6 +73,7 @@ def gameExit(event):
 def levelOne(event):
     canvas.delete("all")
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
+
 
 
 def levelTwo(event):
@@ -126,6 +126,7 @@ def lsoeThree(event):
 
 
 # create image start
+
 canvas.create_image(680, 372, image=game_start)
 canvas.create_image(630,280, image=btn_start_game, tags="startgame")
 canvas.create_image(630,540,image=btn_help_game, tags="help")
@@ -134,6 +135,7 @@ canvas.create_image(630,410,image=btn_exit_game, tags="exit")
 # ------------------------------------------------------------------------
 # Bind the button clicks to the corresponding functions
 # ------------------------------------------------------------------------
+
 canvas.tag_bind("help", "<Button-1>", gameHelp)
 canvas.tag_bind("exit", "<Button-1>", gameExit)
 canvas.tag_bind("back", "<Button-1>", gameShow)
