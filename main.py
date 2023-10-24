@@ -121,6 +121,8 @@ def levelThree(event):
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
 
 
+# ----
+
 # ------------- gravity function and movement ---------------------
 def check_movement(dx=0, dy=0, checkGround=False):
     coord = canvas.coords(player)
