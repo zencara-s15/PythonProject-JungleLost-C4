@@ -76,7 +76,7 @@ plaform = ImageTk.PhotoImage(plaform_file)
 
 # show start game
 def gameShow(event):
-    canvas.delete("all")
+
     canvas.create_image(680, 372, image=game_start)
     canvas.create_image(680,280, image=btn_start_game, tags="startgame")
     canvas.create_image(680,540,image=btn_help_game, tags="help")
