@@ -178,25 +178,26 @@ def gameExit(event):
     window.destroy()
 
 # --------------------------win----------------------------
-def winOne(event):
-    canvas.create_image(590,300, image=game_win)
-    canvas.create_image(620,550, image=btn_back_game, tags="back1")
+
 
 # -------------------------lose---------------------
 
-# ----------------------------------------------------------------------------------
+# -----------------------------------PROCESS GAME-----------------------------------------------
+def gameWin():
+    return True
 
 def gameOver():
     loseOne()
-    
-    
-# ----------------------------------------------------------------------------------
+
+def winOne(event):
+    canvas.create_image(590,300, image=game_win)
+    canvas.create_image(620,550, image=btn_back_game, tags="back1") 
 
 def loseOne():
     canvas.create_image(650,361,image=game_lose)
     canvas.create_image(640,550, image=btn_back_game, tags="back1")
 
-# create image start
+
 def levelOne(event):
     global player
     canvas.delete("all")
@@ -232,9 +233,9 @@ def levelOne(event):
     canvas.create_image(3300, 400, image=grass_level1, tags="GROUND")
     canvas.create_image(3600, 250, image=grass_level1, tags="GROUND")
     canvas.create_image(3400, 500, image=grass_level1, tags="GROUND")
+
     # fiuits
    
-    
     global fruit_id 
     fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
     fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
@@ -257,7 +258,6 @@ def levelOne(event):
     enemies_id =canvas.create_image(2900,315, image=snake_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(930,260, image=snake_level1, tags="ENEMIES")
 
-    
     enemies_id =canvas.create_image(400,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(1000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(1600,590, image=rock_level1, tags="ENEMIES")
