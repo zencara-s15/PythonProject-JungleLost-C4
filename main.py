@@ -6,7 +6,8 @@ import time
 # player ----
 GRAVITY_FORCE = 10
 JUMP_FORCE = 35
-SPEED = 10
+SPEED = 5
+BG_SPEED = 2
 TIMED_LOOP = 5
 
 # enemy-move -----
@@ -177,7 +178,15 @@ def gameHelp(event):
 def gameExit(event):
     window.destroy()
 
-# --------------------------win----------------------------
+# --------------------------Screen_Scrolling-----------------------------------------------
+def scroll_screen_right():
+    canvas.move('all',-BG_SPEED,0)
+    if canvas.coords('all')[0]<-2000:
+        canvas.coords('all',2000,0)
+
+def scroll_screen_left():
+    canvas.move('all',+BG_SPEED,0)
+
 
 
 # -------------------------lose---------------------
@@ -453,9 +462,11 @@ def move():
         if "Left" in keyPressed:
             canvas.itemconfigure(player,image=charL)
             x -= SPEED
+            scroll_screen_left()
         if "Right" in keyPressed:
             canvas.itemconfigure(player,image=charR)
             x += SPEED
+            scroll_screen_right()
         if "space" in keyPressed and not check_movement(0, GRAVITY_FORCE, True):
             jump(JUMP_FORCE)
         if check_movement(x):
