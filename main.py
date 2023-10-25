@@ -47,7 +47,7 @@ game_menu = tk.PhotoImage(file="img/menu-game.png")
 btn_start_game = tk.PhotoImage(file="img/menu/start.png")
 btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
 btn_help_game = tk.PhotoImage(file="img/menu/help.png")
-btn_back_game = tk.PhotoImage(file="img/menu/back.png")
+# btn_back_game = tk.PhotoImage(file="img/menu/back.png")
 btn_back_game = tk.PhotoImage(file="img/menu/come_back.png")
 
 
@@ -153,57 +153,66 @@ apple_level1 = tk.PhotoImage(file="img/fruits/apple.png")
 
 # show start game
 def gameShow(event):
+    winsound.PlaySound("sounds/bg.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
     canvas.create_image(680, 372, image=game_start)
     canvas.create_image(630,150, image=game_menu)
     canvas.create_image(630,280, image=btn_start_game, tags="startgame")
     canvas.create_image(630,540,image=btn_help_game, tags="help")
     canvas.create_image(630,410,image=btn_exit_game, tags="exit")
-    
 
+
+    
 # show level game
 def levelGame(event):
+    winsound.PlaySound("sounds/soun-level.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
     canvas.delete(all)
     canvas.create_image(650,352, image=game_level)
     canvas.create_image(250,302, image=level1, tags="level1")
     canvas.create_image(640,302, image=level2, tags="level2")
     canvas.create_image(1030,302, image=level3, tags="level3")
     canvas.create_image(640, 502, image=btn_back_game, tags="back")
-    winsound.PlaySound("sounds/over.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
-
 
 # show for how to play
 def gameHelp(event):
-    # canvas.delete("all")
+    canvas.delete("all")
     canvas.create_image(680, 372, image=game_help)
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
+    winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
+
 
 # close game
 def gameExit(event):
     window.destroy()
+    winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
 
 # --------------------------win----------------------------
 def winOne(event):
     canvas.create_image(590,300, image=game_win)
     canvas.create_image(620,550, image=btn_back_game, tags="back1")
+    winsound.PlaySound("sounds/win.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+
 
 # -------------------------lose---------------------
 
-# ----------------------------------------------------------------------------------
-
 def gameOver():
-    loseOne()
     
+    loseOne()
+    winsound.PlaySound("sounds/over.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
     
 # ----------------------------------------------------------------------------------
 
 def loseOne():
     canvas.create_image(650,361,image=game_lose)
     canvas.create_image(640,550, image=btn_back_game, tags="back1")
+    
+
 
 # create image start
 def levelOne(event):
     global player
     canvas.delete("all")
+    winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
+
     
     canvas.create_image(600,280, image=bg_lvl1)
     canvas.create_image(1950,280, image=bg_lvl1)
@@ -277,6 +286,8 @@ def levelOne(event):
 def levelTwo(event):
     global player
     canvas.delete("all")
+    winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
+
     canvas.create_image(600,280, image=bg_lvl2)
     canvas.create_image(1950,280, image=bg_lvl2)
     canvas.create_image(3300,280, image=bg_lvl2)
@@ -360,6 +371,8 @@ def levelThree(event):
     canvas.delete("all")
     global player
     # canvas.create_image(700,350,image=bg)
+    winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
+
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
@@ -394,11 +407,10 @@ def eat_fruit():
     overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + play.width(),coord[1] + play.height())
     for fr in fruits:
         if fr in overlap:
-            return fr
+            return fr      
     return 0
-
+    
 # FUNCTION___________________ENEMIES​​ AND LOST CONDITIION
-# def enemies():
 def meet_enemies():
     coord = canvas.coords(player)
     enemies = canvas.find_withtag("ENEMIES")
@@ -429,6 +441,8 @@ def check_movement(dx=0, dy=0, checkGround=False):
     if fruit_id > 0:
         coord = canvas.coords(fruit_id)
         canvas.delete(fruit_id)
+        winsound.PlaySound("sounds/eat.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+
 
     global enemies_id
     enemies_id = meet_enemies()
@@ -436,6 +450,7 @@ def check_movement(dx=0, dy=0, checkGround=False):
         coord = canvas.coords(enemies_id)
         canvas.itemconfig(player,image=enemy)
         gameOver()
+
     return True
 
 
@@ -444,6 +459,7 @@ def jump(force):
         if check_movement(0, -force):
             canvas.move(player, 0, -force)
             window.after(TIMED_LOOP, jump, force-1)
+
            
 def start_move(event):
     if event.keysym not in keyPressed:
@@ -462,6 +478,8 @@ def move():
             x += SPEED
         if "space" in keyPressed and not check_movement(0, GRAVITY_FORCE, True):
             jump(JUMP_FORCE)
+            winsound.PlaySound("sounds/jump.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+
         if check_movement(x):
             canvas.move(player, x, 0)
         window.after(TIMED_LOOP, move)
@@ -489,7 +507,7 @@ canvas.create_image(630,150, image=game_menu)
 canvas.create_image(630,280, image=btn_start_game, tags="startgame")
 canvas.create_image(630,540,image=btn_help_game, tags="help")
 canvas.create_image(630,410,image=btn_exit_game, tags="exit")
-winsound.PlaySound("sounds/open.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+winsound.PlaySound("sounds/bg.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
 
 # ------------------------------------------------------------------------
 # Bind the button clicks to the corresponding functions
@@ -506,7 +524,6 @@ canvas.tag_bind("level1", "<Button-1>", levelOne)
 canvas.tag_bind("level2", "<Button-1>", levelTwo)
 canvas.tag_bind("level3", "<Button-1>", levelThree)
 
-canvas.tag_bind("back2", "<Button-1>", loseOne)
 canvas.tag_bind("back1", "<Button-1>", levelGame)
 
 canvas.pack(expand=True, fill='both')
