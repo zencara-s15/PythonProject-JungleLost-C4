@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from PIL import Image , ImageTk
+import winsound
 import time
 
 # player ----
@@ -106,6 +107,7 @@ def gameShow(event):
     canvas.create_image(630,280, image=btn_start_game, tags="startgame")
     canvas.create_image(630,540,image=btn_help_game, tags="help")
     canvas.create_image(630,410,image=btn_exit_game, tags="exit")
+    
 
 # show level game
 def levelGame(event):
@@ -115,6 +117,8 @@ def levelGame(event):
     canvas.create_image(640,302, image=level2, tags="level2")
     canvas.create_image(1030,302, image=level3, tags="level3")
     canvas.create_image(640, 502, image=btn_back_game, tags="back")
+    winsound.PlaySound("sounds/over.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+
 
 # show for how to play
 def gameHelp(event):
@@ -225,7 +229,7 @@ def jump(force):
         if check_movement(0, -force):
             canvas.move(player, 0, -force)
             window.after(TIMED_LOOP, jump, force-1)
-
+           
 def start_move(event):
     if event.keysym not in keyPressed:
         keyPressed.append(event.keysym)
@@ -268,6 +272,7 @@ canvas.create_image(630,150, image=game_menu)
 canvas.create_image(630,280, image=btn_start_game, tags="startgame")
 canvas.create_image(630,540,image=btn_help_game, tags="help")
 canvas.create_image(630,410,image=btn_exit_game, tags="exit")
+winsound.PlaySound("sounds/open.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
 
 # ------------------------------------------------------------------------
 # Bind the button clicks to the corresponding functions
