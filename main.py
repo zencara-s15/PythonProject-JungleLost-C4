@@ -84,16 +84,31 @@ bg = ImageTk.PhotoImage(bg_file)
 
 bg_level2=tk.PhotoImage(file="img/background/bgL2.png")
 
+bg_lvl3 = tk.PhotoImage(file="img/background/bgl3.png")
 # ---------------- this place for create platform image for all lvl
 grass_level2 = tk.PhotoImage(file="img/grassl2.png")
+
+rock_lvl2_file = Image.open("img/menu/rock-stones.webp")
+rock_lvl2_size = rock_lvl2_file.resize((80,50))
+rock_lvl2 = ImageTk.PhotoImage(rock_lvl2_size)
 
 plaform_file = Image.open("bg.jpg")  #this is for condition test only
 plaform = ImageTk.PhotoImage(plaform_file)
 # ---------------- this place for create enemies image for all lvl
+tiger_lvl2_file = Image.open("img/enemies/tiger.png")
+tiger_lvl2_size =tiger_lvl2_file.resize((80,80))
+tigerlvl2 = ImageTk.PhotoImage(tiger_lvl2_size)
 
 enemies_file = Image.open("enemy.png")
 enemies_size = enemies_file.resize((50,50))
 enemy =ImageTk.PhotoImage(enemies_size)
+snak_lvl2_file =Image.open("img/enemies/snak.png")
+snak_lvl2_size = snak_lvl2_file.resize((50,50))
+snak_lvl2 =ImageTk.PhotoImage(snak_lvl2_size)
+
+trap_lvl2_file = Image.open("img/enemies/trap.webp")
+trap_lvl2_size = trap_lvl2_file.resize((50,50))
+trap_lvl2 = ImageTk.PhotoImage(trap_lvl2_size)
 
 # ---------------- this place for create fruits image for all lvl
 apple_level2_file = Image.open("img/enemies/apple.png")
@@ -104,6 +119,10 @@ apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
 apple_level1 = tk.PhotoImage(file="img/levelOne_image/apple.png")
 
 
+#-------------------this place for creat key img all lvl
+key_lvl2_file= Image.open("img/key.png")
+key_lvl2_size= key_lvl2_file.resize((50,25))
+key_lvl2 =ImageTk.PhotoImage(key_lvl2_size)
 
 # show start game
 def gameShow(event):
@@ -142,14 +161,12 @@ def winOne(event):
 # ----------------------------------------------------------------------------------
 
 def gameOver():
-    canvas.delete("all")
-    canvas.create_image(650,361,image=game_lose)
-    # canvas.create_image(750,550, image=btn_restart_game, tags="restartOne")
+    loseOne()
+    
     
 # ----------------------------------------------------------------------------------
 
-
-def loseOne(event):
+def loseOne():
     canvas.create_image(650,361,image=game_lose)
     canvas.create_image(640,550, image=btn_back_game, tags="back1")
 
@@ -219,43 +236,66 @@ def levelTwo(event):
     canvas.create_image(600,280, image=bg_level2)
     canvas.create_image(1950,280, image=bg_level2)
     canvas.create_image(3300,280, image=bg_level2)
-
-    #scrollbar
+    canvas.create_rectangle(0,630,3800,700,fill="white",tags="GROUND")
+    player = canvas.create_image(50, 100, image=play)
+    # #scrollbar
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
     #_______________wall____________________________
     canvas.create_image(300, 150, image=grass_level2,  tags="GROUND")
-    canvas.create_image(500, 350, image=grass_level2,  tags="GROUND")
-    canvas.create_image(700, 550, image=grass_level2,  tags="GROUND")
-    canvas.create_image(1100,550, image=grass_level2,  tags="GROUND")
-    canvas.create_image(900, 350, image=grass_level2,  tags="GROUND")
+    canvas.create_image(100, 400, image=grass_level2,  tags="GROUND")
+    canvas.create_image(500, 320, image=grass_level2,  tags="GROUND")
+    canvas.create_image(700, 500, image=grass_level2,  tags="GROUND")
+    canvas.create_image(1100,500, image=grass_level2,  tags="GROUND")
+    canvas.create_image(900, 320, image=grass_level2,  tags="GROUND")
     canvas.create_image(750, 150, image=grass_level2,  tags="GROUND")
     canvas.create_image(1200, 150, image=grass_level2, tags="GROUND")
-    canvas.create_image(1400, 350, image=grass_level2, tags="GROUND")
-    canvas.create_image(1600, 550, image=grass_level2, tags="GROUND")
-    canvas.create_image(2000, 550, image=grass_level2, tags="GROUND")
-    canvas.create_image(1800, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(1400, 320, image=grass_level2, tags="GROUND")
+    canvas.create_image(1600, 500, image=grass_level2, tags="GROUND")
+    canvas.create_image(2000, 500, image=grass_level2, tags="GROUND")
+    canvas.create_image(1800, 320, image=grass_level2, tags="GROUND")
     canvas.create_image(1600, 150, image=grass_level2, tags="GROUND")
     canvas.create_image(2000, 150, image=grass_level2, tags="GROUND")
-    canvas.create_image(2200, 350, image=grass_level2, tags="GROUND")
-    canvas.create_image(2400, 550, image=grass_level2, tags="GROUND")
-    canvas.create_image(2800, 550, image=grass_level2, tags="GROUND")
-    canvas.create_image(2600, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(2200, 320, image=grass_level2, tags="GROUND")
+    canvas.create_image(2400, 500, image=grass_level2, tags="GROUND")
+    canvas.create_image(2800, 500, image=grass_level2, tags="GROUND")
+    canvas.create_image(2600, 320, image=grass_level2, tags="GROUND")
     canvas.create_image(2400, 150, image=grass_level2, tags="GROUND")
     canvas.create_image(2800, 150, image=grass_level2, tags="GROUND")
-    canvas.create_image(3000, 350, image=grass_level2, tags="GROUND")
-    canvas.create_image(3200, 550, image=grass_level2, tags="GROUND")
-    canvas.create_image(3600, 550, image=grass_level2, tags="GROUND")
-    canvas.create_image(3400, 350, image=grass_level2, tags="GROUND")
+    canvas.create_image(3000, 320, image=grass_level2, tags="GROUND")
+    canvas.create_image(3200, 500, image=grass_level2, tags="GROUND")
+    canvas.create_image(3600, 500, image=grass_level2, tags="GROUND")
+    canvas.create_image(3400, 320, image=grass_level2, tags="GROUND")
     canvas.create_image(3200, 150, image=grass_level2, tags="GROUND")
     canvas.create_image(3600, 150, image=grass_level2, tags="GROUND")
+    #______________________apple_level2______________,tags="GROUND"___
+    canvas.create_image(300,110, image =apple_leveL2,tags= "FRUITS")
+    canvas.create_image(900,280, image =apple_leveL2,tags= "FRUITS")
+    canvas.create_image(1600,110, image =apple_leveL2,tags= "FRUITS")
+    canvas.create_image(2200,280, image =apple_leveL2,tags= "FRUITS")
+    canvas.create_image(2800,110, image =apple_leveL2,tags= "FRUITS")
+    canvas.create_image(3600,110, image =apple_leveL2,tags= "FRUITS")
+    #_____________________creat rocklvl2_____________________
+    canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
+    canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
+    canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
+    canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
+    #__________________creat enemies_________
+    #__tiger__
+    canvas.create_image(750,465, image=tigerlvl2, tags = "ENEMIES")
+    canvas.create_image(2450,465, image=tigerlvl2, tags = "ENEMIES")
+    canvas.create_image(80,600, image=tigerlvl2, tags = "ENEMIES")
+    canvas.create_image(3400,600, image=tigerlvl2, tags = "ENEMIES")
+    #__snak__
+    canvas.create_image(500,280, image = snak_lvl2, tags ="ENEMIES")
+    canvas.create_image(1850,275, image = snak_lvl2, tags ="ENEMIES")
+    canvas.create_image(3050,275, image = snak_lvl2, tags ="ENEMIES")
+    #___trap__
+    canvas.create_image(1200,130, image = trap_lvl2, tags ="ENEMIES")
+    canvas.create_image(2400,130, image = trap_lvl2, tags ="ENEMIES")
 
-    global player
-    canvas.delete("all")
-    canvas.create_image(700,350,image=bg)
-    player = canvas.create_image(50, 100, image=play)
-    canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
+   
     
 # ----------------------------------------------------------------------------------
 
@@ -272,35 +312,25 @@ def levelTwo(event):
     fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
 
 
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+    #__________________Creat Key when winning lvl2______________
+    canvas.create_image(2950, 290, image= key_lvl2, tags="KEY") 
 
-
-def levelThree(event):
-    global player
+def levelThree(event):  
     canvas.delete("all")
-    canvas.create_image(700,350,image=bg)
-     # fiuits
-    global fruit_id 
-
-    fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
-
-    # player 
     global player
+    # canvas.create_image(700,350,image=bg)
     player = canvas.create_image(50, 100, image=play)
-    canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
-
-    # back btn 
+    canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
-   
+    #background L3
+    canvas.create_image(600,300, image=bg_lvl3)
+    canvas.create_image(1950,300, image=bg_lvl3)
+    canvas.create_image(3300,300, image=bg_lvl3)
+    #scrollbar
+    scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
+    canvas.configure(xscrollcommand=scrollbar_bottom.set)
+    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
 
-def levelThree(event):
-    canvas.delete("all")
-
-
-    # fiuits
     global fruit_id 
 
     fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
@@ -309,7 +339,6 @@ def levelThree(event):
     fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
 
     # player 
-    global player
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
 
