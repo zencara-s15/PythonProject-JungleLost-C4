@@ -373,25 +373,34 @@ def levelTwo(event):
 def levelThree(event):  
     canvas.delete("all")
     global player
-    # canvas.create_image(700,350,image=bg)
-    player = canvas.create_image(50, 100, image=play)
-    canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
     #background L3
-    canvas.create_image(600,300, image=bg_lvl3)
-    canvas.create_image(1950,300, image=bg_lvl3)
-    canvas.create_image(3300,300, image=bg_lvl3)
+    canvas.create_image(600,280, image=bg_lvl3)
+    canvas.create_image(1950,280, image=bg_lvl3)
+    canvas.create_image(3300,280, image=bg_lvl3)
     #scrollbar
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
     # platform
-    canvas.create_image(150, 150, image=grass_lvl3, tags ="GROUND") 
-    canvas.create_image(100, 630, image=grass_lvl3, tags ="GROUND") 
-    canvas.create_image(400, 450, image=grass_lvl3, tags ="GROUND") 
-    canvas.create_image(700, 270, image=grass_lvl3, tags ="GROUND") 
-    canvas.create_image(400, 150, image=grass_lvl3, tags ="GROUND") 
-    # canvas.create_image(110, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(100, 200, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(100, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(400, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(600, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(810, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1100, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1700, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1400, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1700, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1100, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(2050, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(2400, 150, image=grass_lvl3, tags ="GROUND")
+    canvas.create_image(2400, 500, image=grass_lvl3, tags ="GROUND")
+    canvas.create_image(2700, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3050, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3050, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3350, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3700, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3700, 150, image=grass_lvl3, tags ="GROUND") 
 
     global fruit_id 
 
@@ -402,8 +411,7 @@ def levelThree(event):
 
     # player 
     player = canvas.create_image(50, 100, image=play)
-    canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
-
+    canvas.create_rectangle(0,630,3800,700,fill="black",tags="GROUND")
     # back btn 
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
