@@ -7,7 +7,8 @@ import time
 # player ----
 GRAVITY_FORCE = 10
 JUMP_FORCE = 35
-SPEED = 10
+SPEED = 4
+BG_SPEED = 2
 TIMED_LOOP = 5
 
 # enemy-move -----
@@ -190,7 +191,14 @@ def winOne(event):
     canvas.create_image(590,300, image=game_win)
     canvas.create_image(620,550, image=btn_back_game, tags="back1")
     winsound.PlaySound("sounds/win.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+# --------------------------Screen_Scrolling-----------------------------------------------
+def scroll_screen_right():
+    canvas.move('all',-BG_SPEED,0)
+    if canvas.coords('all')[0]<-2000:
+        canvas.coords('all',2000,0)
 
+def scroll_screen_left():
+    canvas.move('all',+BG_SPEED,0)
 
 # -------------------------lose---------------------
 
@@ -200,6 +208,10 @@ def gameOver():
     winsound.PlaySound("sounds/over.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
     
 # ----------------------------------------------------------------------------------
+# -----------------------------------PROCESS GAME-----------------------------------------------
+def gameWin():
+    return True
+
 
 def loseOne():
     canvas.create_image(650,361,image=game_lose)
@@ -207,13 +219,12 @@ def loseOne():
     
 
 
-# create image start
+
 def levelOne(event):
     global player
     canvas.delete("all")
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
 
-    
     canvas.create_image(600,280, image=bg_lvl1)
     canvas.create_image(1950,280, image=bg_lvl1)
     canvas.create_image(3300,280, image=bg_lvl1)
@@ -245,9 +256,9 @@ def levelOne(event):
     canvas.create_image(3300, 400, image=grass_level1, tags="GROUND")
     canvas.create_image(3600, 250, image=grass_level1, tags="GROUND")
     canvas.create_image(3400, 500, image=grass_level1, tags="GROUND")
+
     # fiuits
    
-    
     global fruit_id 
     fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
     fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
@@ -270,7 +281,6 @@ def levelOne(event):
     enemies_id =canvas.create_image(2900,315, image=snake_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(930,260, image=snake_level1, tags="ENEMIES")
 
-    
     enemies_id =canvas.create_image(400,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(1000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(1600,590, image=rock_level1, tags="ENEMIES")
@@ -473,9 +483,11 @@ def move():
         if "Left" in keyPressed:
             canvas.itemconfigure(player,image=charL)
             x -= SPEED
+            scroll_screen_left()
         if "Right" in keyPressed:
             canvas.itemconfigure(player,image=charR)
             x += SPEED
+            scroll_screen_right()
         if "space" in keyPressed and not check_movement(0, GRAVITY_FORCE, True):
             jump(JUMP_FORCE)
             winsound.PlaySound("sounds/jump.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
