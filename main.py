@@ -88,25 +88,24 @@ bg_level2=tk.PhotoImage(file="img/background/bgL2.png")
 
 # ---------------- this place for create platform image for all lvl
 grass_level2 = tk.PhotoImage(file="img/grassl2.png")
-
 plaform_file = Image.open("bg.jpg")  #this is for condition test only
 plaform = ImageTk.PhotoImage(plaform_file)
 grass_level1 = tk.PhotoImage(file="img/levelOne_image/grass.png")
-tiger_level1 = tk.PhotoImage(file="img/levelOne_image/tiger.png")
 snake_level1 = tk.PhotoImage(file="img/levelOne_image/snake.png")
 
-
+key_lvl1_file =Image.open("img/levelOne_image/key.png")
+key_lvl1_size= key_lvl1_file.resize((50,25))
+key_lvl1 = ImageTk.PhotoImage(key_lvl1_size)
 
 # ---------------- this place for create enemies image for all lvl
-
-
+tiger_level1 = tk.PhotoImage(file="img/levelOne_image/tiger.png")
+rock_level1 = tk.PhotoImage(file="img/levelOne_image/rock.png")
 
 # ---------------- this place for create fruits image for all lvl
 apple_level2_file = Image.open("img/enemies/apple.png")
 apple_level2_size = apple_level2_file.resize((50,50))
 apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
 apple_level1 = tk.PhotoImage(file="img/levelOne_image/apple.png")
-
 
 # show start game
 def gameShow(event):
@@ -195,39 +194,55 @@ def levelOne(event):
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
 
     #grass 
-    canvas.create_image(150,300, image=grass_level1, tags="GROUND")
-    canvas.create_image(390,500, image=grass_level1, tags="GROUND")
+    canvas.create_image(200, 195, image=grass_level1, tags="GROUND")
+    canvas.create_image(230, 420, image=grass_level1, tags="GROUND")
     canvas.create_image(700, 230, image=grass_level1, tags="GROUND")
-    canvas.create_image(800,450, image=grass_level1, tags="GROUND")
-    canvas.create_image(500,350, image=grass_level1, tags="GROUND")
+    canvas.create_image(800, 450, image=grass_level1, tags="GROUND")
+    canvas.create_image(500, 350, image=grass_level1, tags="GROUND")
     canvas.create_image(950, 295, image=grass_level1, tags="GROUND")
     canvas.create_image(1200, 450, image=grass_level1, tags="GROUND")
-    canvas.create_image(1300,200, image=grass_level1, tags="GROUND")
+    canvas.create_image(1300, 200, image=grass_level1, tags="GROUND")
     canvas.create_image(1700, 250, image=grass_level1, tags="GROUND")
     canvas.create_image(1500, 400, image=grass_level1, tags="GROUND")
     canvas.create_image(1900, 500, image=grass_level1, tags="GROUND")
     canvas.create_image(2000, 300, image=grass_level1, tags="GROUND")
     canvas.create_image(2300, 450, image=grass_level1, tags="GROUND")
     canvas.create_image(2500, 150, image=grass_level1, tags="GROUND")
-    canvas.create_image(2800, 350, image=grass_level1, tags="GROUND")
-    canvas.create_image(2600, 300, image=grass_level1, tags="GROUND")
+    canvas.create_image(2900, 350, image=grass_level1, tags="GROUND")
+    canvas.create_image(2500, 300, image=grass_level1, tags="GROUND")
     canvas.create_image(3000, 200, image=grass_level1, tags="GROUND")
     canvas.create_image(3300, 400, image=grass_level1, tags="GROUND")
-    canvas.create_image(3700, 250, image=grass_level1, tags="GROUND")
+    canvas.create_image(3600, 250, image=grass_level1, tags="GROUND")
     canvas.create_image(3400, 500, image=grass_level1, tags="GROUND")
-
+    
     # fiuits
     canvas.create_image(840,410, image=apple_level1, tags="GROUND")
     canvas.create_image(3000,160, image=apple_level1, tags="GROUND")
     canvas.create_image(1700,210, image=apple_level1, tags="GROUND")
     canvas.create_image(2300,410, image=apple_level1, tags="GROUND")
+
+    canvas.create_image(800,570, image=tiger_level1, tags="GROUND")
+    canvas.create_image(2700,550, image=tiger_level1, tags="GROUND")
+
+    canvas.create_image(3600,210, image=key_lvl1, tags="GROUND")
+
+    canvas.create_image(2010,265, image=snake_level1, tags="GROUND")
+    canvas.create_image(2900,315, image=snake_level1, tags="GROUND")
+    canvas.create_image(930,260, image=snake_level1, tags="GROUND")
+
+    canvas.create_image(400,590, image=rock_level1, tags="GROUND")
+    canvas.create_image(1000,590, image=rock_level1, tags="GROUND")
+    canvas.create_image(1600,590, image=rock_level1, tags="GROUND")
+    canvas.create_image(2000,590, image=rock_level1, tags="GROUND")
+    canvas.create_image(3000,590, image=rock_level1, tags="GROUND")
+    canvas.create_image(3500,590, image=rock_level1, tags="GROUND")
     
 
     global player
     player = canvas.create_image(50, 100, image=play)
-    canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
+    canvas.create_rectangle(0,620,3800,700,fill="White",tags="GROUND")
     
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
+    canvas.create_image(140, 100, image=btn_back_game, tags="black")
 
 
 def levelTwo(event):
@@ -374,7 +389,6 @@ canvas.tag_bind("nextThree", "<Button-1>",levelThree )
 canvas.tag_bind("level1", "<Button-1>", levelOne)
 canvas.tag_bind("level2", "<Button-1>", levelTwo)
 canvas.tag_bind("level3", "<Button-1>", levelThree)
-
 
 canvas.pack(expand=True, fill='both')
 window.mainloop()
