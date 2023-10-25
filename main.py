@@ -6,7 +6,7 @@ import time
 # player ----
 GRAVITY_FORCE = 10
 JUMP_FORCE = 35
-SPEED = 5
+SPEED = 4
 BG_SPEED = 2
 TIMED_LOOP = 5
 
