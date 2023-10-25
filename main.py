@@ -226,7 +226,6 @@ def levelOne(event):
     
 # ----------------------------------------------------------------------------------
 
-
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 
