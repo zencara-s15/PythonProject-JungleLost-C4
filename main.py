@@ -144,12 +144,14 @@ tiger_level1 = tk.PhotoImage(file="img/levelOne_image/tiger.png")
 rock_level1 = tk.PhotoImage(file="img/enemies/rock.png")
 
 # ---------------- this place for create fruits image for all lvl
+apple_level1 = tk.PhotoImage(file="img/fruits/apple.png")
 apple_level2_file = Image.open("img/fruits/apple.png")
 apple_level2_size = apple_level2_file.resize((50,50))
 apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
+# apple_level3 = tk.PhotoImage(file="img/fruits/apple.png")
 
 
-apple_level1 = tk.PhotoImage(file="img/fruits/apple.png")
+
 
 
 # #-------------------this place for creat key img all lvl
