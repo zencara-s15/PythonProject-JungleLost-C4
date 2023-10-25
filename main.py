@@ -88,13 +88,18 @@ bg_lvl3 = tk.PhotoImage(file="img/background/bgl3.png")
 # ---------------- this place for create platform image for all lvl
 grass_level2 = tk.PhotoImage(file="img/grassl2.png")
 
-rock_lvl2_file = Image.open("img/menu/rock-stones.webp")
-rock_lvl2_size = rock_lvl2_file.resize((80,50))
-rock_lvl2 = ImageTk.PhotoImage(rock_lvl2_size)
+grass_lvl3_file=Image.open("img/menu/grassL3.png")
+grass_lvl3_size =grass_lvl3_file.resize((200,50))
+grass_lvl3 =ImageTk.PhotoImage(grass_lvl3_size)
 
 plaform_file = Image.open("bg.jpg")  #this is for condition test only
 plaform = ImageTk.PhotoImage(plaform_file)
 # ---------------- this place for create enemies image for all lvl
+
+rock_lvl2_file = Image.open("img/menu/rock-stones.webp")
+rock_lvl2_size = rock_lvl2_file.resize((80,50))
+rock_lvl2 = ImageTk.PhotoImage(rock_lvl2_size)
+
 tiger_lvl2_file = Image.open("img/enemies/tiger.png")
 tiger_lvl2_size =tiger_lvl2_file.resize((80,80))
 tigerlvl2 = ImageTk.PhotoImage(tiger_lvl2_size)
@@ -280,7 +285,13 @@ def levelThree(event):
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
-    
+    # platform
+    canvas.create_image(150, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(100, 630, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(400, 450, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(700, 270, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(400, 150, image=grass_lvl3, tags ="GROUND") 
+    # canvas.create_image(110, 500, image=grass_lvl3, tags ="GROUND") 
 
 # create image
 
