@@ -86,6 +86,15 @@ bg_file = Image.open("bg.jpg")
 bg = ImageTk.PhotoImage(bg_file)
 
 bg_lvl1=tk.PhotoImage(file="img/background/bgL1.png")
+tree_bg_file = Image.open("img/menu/tree.png")
+tree_bg_size =tree_bg_file.resize((100,150))
+tree_bg = ImageTk.PhotoImage(tree_bg_size)
+
+tree2_bg_file = Image.open("img/menu/tree2.png")
+tree2_bg_size =tree2_bg_file.resize((100, 150))
+tree2_bg = ImageTk.PhotoImage(tree2_bg_size)
+
+
 
 bg_lvl2=tk.PhotoImage(file="img/background/bgL2.png")
 
@@ -99,6 +108,9 @@ grass_level2 = tk.PhotoImage(file="img/grassl2.png")
 
 
 
+grass_lvl3_file=Image.open("img/menu/grassL3.png")
+grass_lvl3_size =grass_lvl3_file.resize((200,50))
+grass_lvl3 =ImageTk.PhotoImage(grass_lvl3_size)
 
 # ---------------- this place for create enemies image for all lvl
 
@@ -109,6 +121,7 @@ snake_level1 = tk.PhotoImage(file="img/levelOne_image/snake.png")
 # key_lvl1_size= key_lvl1_file.resize((50,25))
 # key_lvl1 = ImageTk.PhotoImage(key_lvl1_size)
 
+lava_wall =  tk.PhotoImage(file="lava.png")
 
 # lvl 2 
 tiger_lvl2_file = Image.open("img/enemies/tiger.png")
@@ -123,6 +136,15 @@ snak_lvl2_file =Image.open("img/enemies/snak.png")
 snak_lvl2_size = snak_lvl2_file.resize((50,50))
 snak_lvl2 =ImageTk.PhotoImage(snak_lvl2_size)
 
+
+snake_level3_file =Image.open("img/enemies/snak.png")
+snake_level3_size = snake_level3_file.resize((50,50))
+snake_level3 =ImageTk.PhotoImage(snake_level3_size)
+
+tiger_level3_file = Image.open("img/enemies/tiger.png")
+tiger_level3_size = tiger_level3_file.resize((95,95))
+tiger_level3 =ImageTk.PhotoImage(tiger_level3_size)
+
 trap_lvl2_file = Image.open("img/enemies/trap.webp")
 trap_lvl2_size = trap_lvl2_file.resize((50,50))
 trap_lvl2 = ImageTk.PhotoImage(trap_lvl2_size)
@@ -131,20 +153,39 @@ rock_lvl2_file = Image.open("img/menu/rock-stones.webp")
 rock_lvl2_size = rock_lvl2_file.resize((80,50))
 rock_lvl2 = ImageTk.PhotoImage(rock_lvl2_size)
 
-lava_wall =  tk.PhotoImage(file="lava.png")
+bird_level2_file=Image.open("img/levelOne_image/bird.png")
+bird_level2_size =bird_level2_file.resize((70,70))
+bird_level2 =ImageTk.PhotoImage(bird_level2_size)
+
+birds_level2_file=Image.open("img/levelOne_image/birds.png")
+birds_level2_size =birds_level2_file.resize((80,80))
+birds_level2 =ImageTk.PhotoImage(birds_level2_size)
+
+flower_level2_file=Image.open("img/levelOne_image/flower.png")
+flower_level2_size =flower_level2_file.resize((120,120))
+flower_level2 =ImageTk.PhotoImage(flower_level2_size)
+
+flowergrass_level2_file=Image.open("img/levelOne_image/flower-grass.png")
+flowergrass_level2_size =flowergrass_level2_file.resize((120,120))
+flowergrass_level2 =ImageTk.PhotoImage(flowergrass_level2_size)
 
 # ---------------- this place for create enemies image for all lvl
 tiger_level1 = tk.PhotoImage(file="img/levelOne_image/tiger.png")
 rock_level1 = tk.PhotoImage(file="img/enemies/rock.png")
 lava_wall =  tk.PhotoImage(file="lava.png")
+
 # ---------------- this place for create fruits image for all lvl
+apple_level1 = tk.PhotoImage(file="img/fruits/apple.png")
+
 apple_level2_file = Image.open("img/fruits/apple.png")
 apple_level2_size = apple_level2_file.resize((50,50))
 apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
 
 
-apple_level1 = tk.PhotoImage(file="img/fruits/apple.png")
 
+banana_level3_file = Image.open("img/fruits/banana.png")
+banana_level3_size = banana_level3_file.resize((55,55))
+banana_level3 =ImageTk.PhotoImage(banana_level3_size)
 
 # #-------------------this place for creat key img all lvl
 # key_lvl2_file= Image.open("img/key.png")
@@ -193,13 +234,13 @@ def gameExit(event):
 # --------------------------Screen_Scrolling-----------------------------------------------
 def scroll_screen_right():
     if canvas.coords(player)[0] < SCREEN_WIDTH and canvas.coords(player)[0] > SCREEN_WIDTH / 2:
-        print(canvas.coords(player)[0])
+        
         canvas.move('all',-BG_SPEED,0)
 
 
 def scroll_screen_left():
     if canvas.coords(player)[0] > 0 and canvas.coords(player)[0] < SCREEN_WIDTH / 2:
-        print(canvas.coords(player)[0])
+        
         canvas.move('all',+BG_SPEED,0)
 
 # --------------------------win----------------------------
@@ -216,9 +257,9 @@ def winOne():
 # -------------------------lose---------------------
 
 def gameOver():
+    winsound.PlaySound("sounds/over.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
     global totalScore
     loseOne()
-    winsound.PlaySound("sounds/over.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
     totalScore =0 
     canvas.itemconfig(displayTotalCash, text=totalScore)
     
@@ -226,7 +267,6 @@ def loseOne():
     canvas.create_image(650,361,image=game_lose)
     canvas.create_image(640,550, image=btn_back_game, tags="back1")
     
-
 
 
 def levelOne(event):
@@ -248,7 +288,7 @@ def levelOne(event):
     displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
     
     
-    #grass 
+    #grass  
     canvas.create_image(100, 195, image=grass_level1, tags="GROUND")
     canvas.create_image(230, 420, image=grass_level1, tags="GROUND")
     canvas.create_image(700, 230, image=grass_level1, tags="GROUND")
@@ -262,13 +302,14 @@ def levelOne(event):
     canvas.create_image(1900, 500, image=grass_level1, tags="GROUND")
     canvas.create_image(2000, 300, image=grass_level1, tags="GROUND")
     canvas.create_image(2300, 450, image=grass_level1, tags="GROUND")
-    canvas.create_image(2500, 150, image=grass_level1, tags="GROUND")
+    canvas.create_image(2700, 150, image=grass_level1, tags="GROUND")
     canvas.create_image(2900, 350, image=grass_level1, tags="GROUND")
     canvas.create_image(2500, 300, image=grass_level1, tags="GROUND")
     canvas.create_image(3000, 200, image=grass_level1, tags="GROUND")
     canvas.create_image(3300, 400, image=grass_level1, tags="GROUND")
     canvas.create_image(3600, 250, image=grass_level1, tags="GROUND")
     canvas.create_image(3400, 500, image=grass_level1, tags="GROUND")
+    
 
     # fiuits
    
@@ -277,28 +318,32 @@ def levelOne(event):
     fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
     fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
     fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
-    fruit_id= canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
     fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
-
-   
-    
+    #Tree on background
+    canvas.create_image(770, 370, image =tree_bg)
+    canvas.create_image(1750, 160, image =tree_bg)
+    canvas.create_image(2360, 365, image =tree_bg)
+    canvas.create_image(3060, 115, image =tree_bg)
+    canvas.create_image(370, 470, image =tree2_bg)
+    canvas.create_image(1000, 470, image =tree2_bg)
+    canvas.create_image(1700, 470, image =tree2_bg)
+    canvas.create_image(2500, 470, image =tree2_bg)
+    canvas.create_image(2580, 470, image =tree2_bg)
+    canvas.create_image(3200, 470, image =tree2_bg)
+    canvas.create_image(3600, 470, image =tree2_bg)
+    canvas.create_image(3700, 470, image =tree2_bg)
+    # flags winner
+    # canvas.create_image(3650, 205, image =flags, tags="FLAGS")
 # ----------------------------------------------------------------------------------
 
     global enemies_id
-    # enemies_id =canvas.create_image(200,410, image=enemy, tags="ENEMIES")
-    enemies_id =canvas.create_image(800,570, image=tiger_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(2700,550, image=tiger_level1, tags="ENEMIES")
 
     enemies_id =canvas.create_image(2010,265, image=snake_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(2900,315, image=snake_level1, tags="ENEMIES")
-    enemies_id =canvas.create_image(930,260, image=snake_level1, tags="ENEMIES")
-
+    enemies_id =canvas.create_image(940,260, image=snake_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(400,590, image=rock_level1, tags="ENEMIES")
-    enemies_id =canvas.create_image(1000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(1600,590, image=rock_level1, tags="ENEMIES")
-    enemies_id =canvas.create_image(2000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(3000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(3500,590, image=rock_level1, tags="ENEMIES")
 
@@ -329,7 +374,6 @@ def levelTwo(event):
     # #scrollbar
     displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
 
-    #_______________wall____________________________
     canvas.create_image(300, 150, image=grass_level2,  tags="GROUND")
     canvas.create_image(100, 400, image=grass_level2,  tags="GROUND")
     canvas.create_image(500, 320, image=grass_level2,  tags="GROUND")
@@ -357,38 +401,55 @@ def levelTwo(event):
     canvas.create_image(3200, 150, image=grass_level2, tags="GROUND")
     canvas.create_image(3600, 150, image=grass_level2, tags="GROUND")
     
-#     canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
-#     canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
-#     canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
-#     canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
-    
-# # ----------------------------------------------------------------------------------
+    canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
+    canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
+    canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
+    canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
+    # bird
+    canvas.create_image(100, 80, image=bird_level2)
+    canvas.create_image(170, 100, image=bird_level2)
+    canvas.create_image(130, 120, image=bird_level2)
+    canvas.create_image(800, 90, image=bird_level2)
+    canvas.create_image(1500, 50, image=bird_level2)
+    canvas.create_image(2000, 90, image=bird_level2)
+    canvas.create_image(2500, 80, image=bird_level2)
+    canvas.create_image(2900, 60, image=bird_level2)
+    canvas.create_image(3200, 50, image=bird_level2)
+    canvas.create_image(3700, 300, image=bird_level2)
+    canvas.create_image(1300, 60, image=birds_level2)
+    canvas.create_image(2500, 60, image=birds_level2)
+    canvas.create_image(3000, 60, image=birds_level2)
+    canvas.create_image(3700, 65, image=birds_level2)
+    # flower
+    canvas.create_image(200,550, image=flower_level2)
+    canvas.create_image(1000,590, image=flower_level2)
+    canvas.create_image(1800,600, image=flower_level2)
+    canvas.create_image(2500,590, image=flower_level2)
+    canvas.create_image(3000,570, image=flower_level2)
+    canvas.create_image(3700,585, image=flower_level2)
 
+    canvas.create_image(900,590, image=flowergrass_level2)
+    canvas.create_image(3600,585, image=flowergrass_level2)
     global enemies_id
-#     #__tiger__
-#     enemies_id =canvas.create_image(2450,465, image=tigerlvl2, tags = "ENEMIES")
-#     enemies_id =canvas.create_image(80,600, image=tigerlvl2, tags = "ENEMIES")
-#     enemies_id =canvas.create_image(750,465, image=tigerlvl2, tags = "ENEMIES")
-#     enemies_id =canvas.create_image(3400,600, image=tigerlvl2, tags = "ENEMIES")
-#     #__snak__
-#     enemies_id =canvas.create_image(500,280, image = snak_lvl2, tags ="ENEMIES")
-#     enemies_id =canvas.create_image(1850,275, image = snak_lvl2, tags ="ENEMIES")
-#     enemies_id = canvas.create_image(3050,275, image = snak_lvl2, tags ="ENEMIES")
-#     #___trap__
-#     enemies_id =canvas.create_image(1200,130, image = trap_lvl2, tags ="ENEMIES")
-#     enemies_id =canvas.create_image(2400,130, image = trap_lvl2, tags ="ENEMIES")
-#     #____ROCK__
-#     enemies_id =canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
-#     enemies_id =canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
-#     enemies_id =canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
-#     enemies_id =canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
-
-    enemies_id =canvas.create_image(-140,350, image=lava_wall, tags="ENEMIES")
-    enemies_id =canvas.create_image(-360,350, image=lava_wall, tags="ENEMIES")
-    enemies_id =canvas.create_image(4300,350, image=lava_wall, tags="ENEMIES")
+    #__tiger__
+    enemies_id =canvas.create_image(2450,465, image=tigerlvl2, tags = "ENEMIES")
+    enemies_id =canvas.create_image(80,600, image=tigerlvl2, tags = "ENEMIES")
+    enemies_id =canvas.create_image(750,465, image=tigerlvl2, tags = "ENEMIES")
+    enemies_id =canvas.create_image(3400,600, image=tigerlvl2, tags = "ENEMIES")
+    #__snak__
+    enemies_id =canvas.create_image(500,280, image = snak_lvl2, tags ="ENEMIES")
+    enemies_id =canvas.create_image(1850,275, image = snak_lvl2, tags ="ENEMIES")
+    enemies_id = canvas.create_image(3050,275, image = snak_lvl2, tags ="ENEMIES")
+    #___trap__
+    enemies_id =canvas.create_image(1200,130, image = trap_lvl2, tags ="ENEMIES")
+    enemies_id =canvas.create_image(2400,130, image = trap_lvl2, tags ="ENEMIES")
+    #____ROCK__
+    enemies_id =canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
+    enemies_id =canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
+    enemies_id =canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
+    enemies_id =canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
     
 # ----------------------------------------------------------------------------------
-# fiuits
     global fruit_id 
  
     fruit_id = canvas.create_image(300,110, image =apple_leveL2,tags= "FRUITS")
@@ -397,6 +458,21 @@ def levelTwo(event):
     fruit_id = canvas.create_image(2200,280, image =apple_leveL2,tags= "FRUITS")
     fruit_id = canvas.create_image(2800,110, image =apple_leveL2,tags= "FRUITS")
     fruit_id = canvas.create_image(3600,110, image =apple_leveL2,tags= "FRUITS")
+
+    enemies_id =canvas.create_image(-140,350, image=lava_wall, tags="ENEMIES")
+    enemies_id =canvas.create_image(-360,350, image=lava_wall, tags="ENEMIES")
+    enemies_id =canvas.create_image(4300,350, image=lava_wall, tags="ENEMIES")
+    
+# ----------------------------------------------------------------------------------
+# fiuits
+    # global fruit_id 
+ 
+    # fruit_id = canvas.create_image(300,110, image =apple_leveL2,tags= "FRUITS")
+    # fruit_id = canvas.create_image(900,280, image =apple_leveL2,tags= "FRUITS")
+    # fruit_id = canvas.create_image(1600,110, image =apple_leveL2,tags= "FRUITS")
+    # fruit_id = canvas.create_image(2200,280, image =apple_leveL2,tags= "FRUITS")
+    # fruit_id = canvas.create_image(2800,110, image =apple_leveL2,tags= "FRUITS")
+    # fruit_id = canvas.create_image(3600,110, image =apple_leveL2,tags= "FRUITS")
 
     #__________________Creat Key when winning lvl2______________
     # canvas.create_image(2950, 290, image= key_lvl2, tags="KEY") 
@@ -411,29 +487,63 @@ def levelThree(event):
 
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
-    #background L3
-    canvas.create_image(600,300, image=bg_lvl3)
-    canvas.create_image(1950,300, image=bg_lvl3)
-    canvas.create_image(3300,300, image=bg_lvl3)
 
     displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
 
-    #scrollbar
-    scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
-    canvas.configure(xscrollcommand=scrollbar_bottom.set)
-    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+    # platform
+    canvas.create_image(100, 200, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(100, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(400, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(590, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(810, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1130, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1730, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1400, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1690, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(1090, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(2050, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(2390, 150, image=grass_lvl3, tags ="GROUND")
+    canvas.create_image(2430, 500, image=grass_lvl3, tags ="GROUND")
+    canvas.create_image(2700, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3080, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3040, 150, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3350, 340, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3730, 500, image=grass_lvl3, tags ="GROUND") 
+    canvas.create_image(3690, 150, image=grass_lvl3, tags ="GROUND") 
 
     global fruit_id 
 
-    fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(1100,465, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(600,115, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(50,460, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(810,310, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(3045,115, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(3075,460, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(1640,120, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(3730,120, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(2400,460, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(2050,310, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(3700,470, image=banana_level3, tags="FRUITS")
 
-    # player 
-    player = canvas.create_image(50, 100, image=play)
-    canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
-    # back btn 
+    global enemies_id
+
+    # tiger
+    enemies_id =canvas.create_image(120,590, image=tiger_level3, tags="ENEMIES")
+    enemies_id =canvas.create_image(2700,550, image=tiger_level3, tags="ENEMIES")
+    enemies_id =canvas.create_image(1300,560, image=tiger_level3, tags="ENEMIES")
+    enemies_id =canvas.create_image(3670,570, image=tiger_level3, tags="ENEMIES")
+    # rock
+    enemies_id =canvas.create_image(550,590, image=rock_level1, tags="ENEMIES")
+    enemies_id =canvas.create_image(2500,590, image=rock_level1, tags="ENEMIES")
+    enemies_id =canvas.create_image(3100,590, image=rock_level1, tags="ENEMIES")
+    # snake
+    enemies_id =canvas.create_image(150,460, image = snake_level3, tags ="ENEMIES")
+    enemies_id =canvas.create_image(1700,460, image = snake_level3, tags ="ENEMIES")
+    enemies_id =canvas.create_image(2450,130, image = snake_level3, tags ="ENEMIES")
+    enemies_id = canvas.create_image(3650,110, image = snake_level3, tags ="ENEMIES")
+    enemies_id = canvas.create_image(1760,120, image = snake_level3, tags ="ENEMIES")
+    # flags winner
+    # canvas.create_image(3650, 200, image =flags, tags="FLAGS")
 
 
 # FUNCTION__________________eat fruits 
@@ -480,10 +590,10 @@ def check_movement(dx=0, dy=0, checkGround=False):
         canvas.delete(fruit_id)
         winsound.PlaySound("sounds/eat.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
      
-        if totalScore ==8:
+        if totalScore == 4:
             coord = canvas.coords(fruit_id)
             gameWin()
-        # return True
+        return True
 
     global enemies_id
     enemies_id = meet_enemies()
@@ -491,7 +601,6 @@ def check_movement(dx=0, dy=0, checkGround=False):
         coord = canvas.coords(enemies_id)
         canvas.itemconfig(player,image=enemy)
         gameOver()
-
     return True
 
 
