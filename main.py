@@ -100,17 +100,17 @@ grass_lvl3_file=Image.open("img/menu/grassL3.png")
 grass_lvl3_size =grass_lvl3_file.resize((200,50))
 grass_lvl3 =ImageTk.PhotoImage(grass_lvl3_size)
 
-bird_level1_file=Image.open("img/levelOne_image/bird.png")
-bird_level1_size =bird_level1_file.resize((70,70))
-bird_level1 =ImageTk.PhotoImage(bird_level1_size)
+bird_level2_file=Image.open("img/levelOne_image/bird.png")
+bird_level2_size =bird_level2_file.resize((70,70))
+bird_level2 =ImageTk.PhotoImage(bird_level2_size)
 
-birds_level1_file=Image.open("img/levelOne_image/birds.png")
-birds_level1_size =birds_level1_file.resize((80,80))
-birds_level1 =ImageTk.PhotoImage(birds_level1_size)
+birds_level2_file=Image.open("img/levelOne_image/birds.png")
+birds_level2_size =birds_level2_file.resize((80,80))
+birds_level2 =ImageTk.PhotoImage(birds_level2_size)
 
-flower_level1_file=Image.open("img/levelOne_image/flower.png")
-flower_level1_size =flower_level1_file.resize((80,80))
-flower_level1 =ImageTk.PhotoImage(flower_level1_size)
+flower_level2_file=Image.open("img/levelOne_image/flower.png")
+flower_level2_size =flower_level2_file.resize((100,100))
+flower_level2 =ImageTk.PhotoImage(flower_level2_size)
 
 
 
@@ -278,8 +278,7 @@ def levelOne(event):
     canvas.create_image(3300, 400, image=grass_level1, tags="GROUND")
     canvas.create_image(3600, 250, image=grass_level1, tags="GROUND")
     canvas.create_image(3400, 500, image=grass_level1, tags="GROUND")
-    # bird
-    canvas.create_image(100, 120, image=bird_level1)
+    
 
     # fiuits
    
@@ -363,21 +362,28 @@ def levelTwo(event):
     canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
     canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
     # bird
-    canvas.create_image(100, 80, image=bird_level1)
-    canvas.create_image(170, 100, image=bird_level1)
-    canvas.create_image(130, 120, image=bird_level1)
-    canvas.create_image(800, 90, image=bird_level1)
-    canvas.create_image(1500, 50, image=bird_level1)
-    canvas.create_image(2000, 90, image=bird_level1)
-    canvas.create_image(2500, 80, image=bird_level1)
-    canvas.create_image(2900, 60, image=bird_level1)
-    canvas.create_image(3200, 50, image=bird_level1)
-    canvas.create_image(3700, 300, image=bird_level1)
+    canvas.create_image(100, 80, image=bird_level2)
+    canvas.create_image(170, 100, image=bird_level2)
+    canvas.create_image(130, 120, image=bird_level2)
+    canvas.create_image(800, 90, image=bird_level2)
+    canvas.create_image(1500, 50, image=bird_level2)
+    canvas.create_image(2000, 90, image=bird_level2)
+    canvas.create_image(2500, 80, image=bird_level2)
+    canvas.create_image(2900, 60, image=bird_level2)
+    canvas.create_image(3200, 50, image=bird_level2)
+    canvas.create_image(3700, 300, image=bird_level2)
+    canvas.create_image(1300, 60, image=birds_level2)
+    canvas.create_image(2500, 60, image=birds_level2)
+    canvas.create_image(3000, 60, image=birds_level2)
+    canvas.create_image(3700, 65, image=birds_level2)
+    # flower
+    canvas.create_image(200,550, image=flower_level2)
+    canvas.create_image(700,550, image=flower_level2)
+    canvas.create_image(2000,550, image=flower_level2)
+    canvas.create_image(2500,550, image=flower_level2)
+    canvas.create_image(3000,550, image=flower_level2)
+    canvas.create_image(3600,550, image=flower_level2)
 
-    canvas.create_image(1300, 60, image=birds_level1)
-    canvas.create_image(2500, 60, image=birds_level1)
-    canvas.create_image(3000, 60, image=birds_level1)
-    canvas.create_image(3700, 65, image=birds_level1)
     
 # ----------------------------------------------------------------------------------
 
