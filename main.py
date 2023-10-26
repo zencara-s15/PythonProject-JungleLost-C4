@@ -27,7 +27,7 @@ window.geometry(str(SCREEN_WIDTH)+"x"+str(SCREEN_HEIGHT))
 window.title('Group C4 - Juggle Game')
 canvas = tk.Canvas(window)
 
-canvas = tk.Canvas(window, width=SCREEN_WIDTH, height=SCREEN_HEIGHT, scrollregion=(0,0,3800,5000))
+canvas = tk.Canvas(window, width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
 canvas.pack()
 # Varaible
 game_start = tk.PhotoImage(file="img/background/bg_game.png")
@@ -61,19 +61,18 @@ ground = tk.PhotoImage(file="img/robar.png")
 # ----------------------funtions-------------------------------------------
 # -------------------------------------------------------------------------
 
-
 # Show start game
 # CHARACTER test for all lvl
 
-play_file = Image.open("img/character/playerR.png")
+play_file = Image.open("img/character/player_right.png")
 play_size = play_file.resize((50, 50))
 play = ImageTk.PhotoImage(play_size)
 
-charR_file = Image.open("img/character/playerR.png")
+charR_file = Image.open("img/character/player_right.png")
 charR_size = charR_file.resize((50, 50))
 charR = ImageTk.PhotoImage(charR_size)
 
-charL_file = Image.open("img/character/playerL.png")
+charL_file = Image.open("img/character/player_left.png")
 charL_size = charL_file.resize((50, 50))
 charL = ImageTk.PhotoImage(charL_size)
 player = canvas.create_image(50, 650, image=play)
@@ -135,6 +134,7 @@ rock_lvl2 = ImageTk.PhotoImage(rock_lvl2_size)
 tiger_level1 = tk.PhotoImage(file="img/levelOne_image/tiger.png")
 rock_level1 = tk.PhotoImage(file="img/enemies/rock.png")
 lava_wall =  tk.PhotoImage(file="lava.png")
+# before_lvl = tk.PhotoImage(file="bg_game.png")
 
 # ---------------- this place for create fruits image for all lvl
 apple_level2_file = Image.open("img/fruits/apple.png")
@@ -180,12 +180,15 @@ def gameExit(event):
 
 # --------------------------Screen_Scrolling-----------------------------------------------
 def scroll_screen_right():
-    canvas.move('all',-BG_SPEED,0)
-    if canvas.coords('all')[0]<-2000:
-        canvas.coords('all',2000,0)
+    if canvas.coords(player)[0] < SCREEN_WIDTH and canvas.coords(player)[0] > SCREEN_WIDTH / 2:
+        print(canvas.coords(player)[0])
+        canvas.move('all',-BG_SPEED,0)
+
 
 def scroll_screen_left():
-    canvas.move('all',+BG_SPEED,0)
+    if canvas.coords(player)[0] > 0 and canvas.coords(player)[0] < SCREEN_WIDTH / 2:
+        print(canvas.coords(player)[0])
+        canvas.move('all',+BG_SPEED,0)
 
 
 
@@ -210,16 +213,19 @@ def loseOne():
 def levelOne(event):
     global player
     canvas.delete("all")
+    canvas.create_rectangle(0,600,10000,601,fill="red",tags="GROUND")
     
-    canvas.create_image(600,280, image=bg_lvl1)
-    canvas.create_image(1950,280, image=bg_lvl1)
-    canvas.create_image(3300,280, image=bg_lvl1)
+    canvas.create_image(0,0, image=bg_lvl1,anchor=NW)
+    canvas.create_image(SCREEN_WIDTH,0, image=bg_lvl1,anchor=NW)
+    canvas.create_image(SCREEN_WIDTH*2,0, image=bg_lvl1,anchor=NW)
+    canvas.create_image(-700,0, image=bg_lvl1,anchor=NW)
+
     player = canvas.create_image(50, 100, image=play)
     # #scrollbar
 
-    scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
-    canvas.configure(xscrollcommand=scrollbar_bottom.set)
-    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+    # scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
+    # canvas.configure(xscrollcommand=scrollbar_bottom.set)
+    # scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
     
     #grass 
     canvas.create_image(100, 195, image=grass_level1, tags="GROUND")
@@ -259,7 +265,6 @@ def levelOne(event):
 # ----------------------------------------------------------------------------------
 
     global enemies_id
-    # enemies_id =canvas.create_image(200,410, image=enemy, tags="ENEMIES")
     enemies_id =canvas.create_image(800,570, image=tiger_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(2700,550, image=tiger_level1, tags="ENEMIES")
 
@@ -274,11 +279,13 @@ def levelOne(event):
     enemies_id =canvas.create_image(3000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(3500,590, image=rock_level1, tags="ENEMIES")
 
-    enemies_id =canvas.create_image(0,350, image=lava_wall, tags="ENEMIES")
+    # canvas.create_image(-700,350, image=before_lvl)
+    enemies_id =canvas.create_image(-140,350, image=lava_wall, tags="ENEMIES")
+    enemies_id =canvas.create_image(-360,350, image=lava_wall, tags="ENEMIES")
+    enemies_id =canvas.create_image(4300,350, image=lava_wall, tags="ENEMIES")
 
 # ----------------------------------------------------------------------------------
 
-    canvas.create_rectangle(0,650,3800,700,fill="White",tags="GROUND")
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 def levelTwo(event):
@@ -286,8 +293,8 @@ def levelTwo(event):
     canvas.delete("all")
     canvas.create_image(600,280, image=bg_lvl2)
     canvas.create_image(1950,280, image=bg_lvl2)
-    canvas.create_image(3300,280, image=bg_lvl2)
-    canvas.create_rectangle(0,630,3800,700,fill="white",tags="GROUND")
+    # canvas.create_image(3300,280, image=bg_lvl2)
+    canvas.create_rectangle(0,630,38000,700,fill="white",tags="GROUND")
     player = canvas.create_image(50, 100, image=play)
     # #scrollbar
 
@@ -420,7 +427,7 @@ def meet_enemies():
 def check_movement(dx=0, dy=0, checkGround=False):
     coord = canvas.coords(player)
     grounds = canvas.find_withtag("GROUND")
-    if coord[0] + dx - 15 < 0 or coord[0] + play.width() + dx > 2800:
+    if coord[0] + dx - 15 < 0 or coord[0] + play.width() + dx > SCREEN_WIDTH:
         return False
     if checkGround:
         overlap = canvas.find_overlapping(coord[0] , coord[1], coord[0] + dx + 50, coord[1] + dy + 15)
@@ -444,6 +451,7 @@ def check_movement(dx=0, dy=0, checkGround=False):
         coord = canvas.coords(enemies_id)
         canvas.itemconfig(player,image=enemy)
         gameOver()
+
     return True
 
 
