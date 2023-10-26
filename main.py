@@ -145,6 +145,7 @@ apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
 
 apple_level1 = tk.PhotoImage(file="img/fruits/apple.png")
 
+totalCash=0
 
 # #-------------------this place for creat key img all lvl
 # key_lvl2_file= Image.open("img/key.png")
@@ -160,6 +161,9 @@ def gameShow(event):
     canvas.create_image(630,280, image=btn_start_game, tags="startgame")
     canvas.create_image(630,540,image=btn_help_game, tags="help")
     canvas.create_image(630,410,image=btn_exit_game, tags="exit")
+    # totalCash =0 
+    # canvas.itemconfig(displayTotalCash, text=totalCash)
+
 
 
     
@@ -172,6 +176,8 @@ def levelGame(event):
     canvas.create_image(640,302, image=level2, tags="level2")
     canvas.create_image(1030,302, image=level3, tags="level3")
     canvas.create_image(640, 502, image=btn_back_game, tags="back")
+
+
 
 # show for how to play
 def gameHelp(event):
@@ -203,9 +209,11 @@ def scroll_screen_left():
 # -------------------------lose---------------------
 
 def gameOver():
-    
+    global totalCash
     loseOne()
     winsound.PlaySound("sounds/over.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+    totalCash =0 
+    canvas.itemconfig(displayTotalCash, text=totalCash)
     
 # ----------------------------------------------------------------------------------
 # -----------------------------------PROCESS GAME-----------------------------------------------
@@ -294,8 +302,10 @@ def levelOne(event):
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 def levelTwo(event):
-    global player
+    global player,displayTotalCash
     canvas.delete("all")
+
+    
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
 
     canvas.create_image(600,280, image=bg_lvl2)
@@ -304,7 +314,7 @@ def levelTwo(event):
     canvas.create_rectangle(0,630,3800,700,fill="white",tags="GROUND")
     player = canvas.create_image(50, 100, image=play)
     # #scrollbar
-
+    displayTotalCash = canvas.create_text(700, 50, text=totalCash, font=("serif", 18 ,'bold'), fill="black")
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
@@ -373,7 +383,6 @@ def levelTwo(event):
     fruit_id = canvas.create_image(2800,110, image =apple_leveL2,tags= "FRUITS")
     fruit_id = canvas.create_image(3600,110, image =apple_leveL2,tags= "FRUITS")
 
-
     #__________________Creat Key when winning lvl2______________
     # canvas.create_image(2950, 290, image= key_lvl2, tags="KEY") 
 
@@ -429,7 +438,6 @@ def meet_enemies():
         if en in overlap:
             return en
     return 0
-
 # ------------- gravity function and movement ---------------------
 def check_movement(dx=0, dy=0, checkGround=False):
     coord = canvas.coords(player)
@@ -449,8 +457,11 @@ def check_movement(dx=0, dy=0, checkGround=False):
     fruit_id = eat_fruit()
 
     if fruit_id > 0:
+        global totalCash
         coord = canvas.coords(fruit_id)
+        totalCash += 1
         canvas.delete(fruit_id)
+        canvas.itemconfig(displayTotalCash, text=totalCash)
         winsound.PlaySound("sounds/eat.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
 
 
@@ -469,8 +480,7 @@ def jump(force):
         if check_movement(0, -force):
             canvas.move(player, 0, -force)
             window.after(TIMED_LOOP, jump, force-1)
-
-           
+          
 def start_move(event):
     if event.keysym not in keyPressed:
         keyPressed.append(event.keysym)
