@@ -227,6 +227,7 @@ def loseOne():
 
 
 def levelOne(event):
+    
     global player, displayTotalCash,fruit_id
     canvas.delete("all")
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
@@ -476,7 +477,6 @@ def check_movement(dx=0, dy=0, checkGround=False):
         gameOver()
 
     return True
-
 
 def jump(force):
     if force > 0:
