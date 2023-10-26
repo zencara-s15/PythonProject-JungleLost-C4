@@ -478,6 +478,7 @@ def check_movement(dx=0, dy=0, checkGround=False):
 
     return True
 
+
 def jump(force):
     if force > 0:
         if check_movement(0, -force):
