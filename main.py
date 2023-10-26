@@ -178,7 +178,6 @@ def levelGame(event):
 
 # show for how to play
 def gameHelp(event):
-    canvas.delete("all")
     canvas.create_image(680, 372, image=game_help)
     canvas.create_image(140, 100, image=btn_back_game, tags="back")
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
@@ -193,7 +192,7 @@ def gameExit(event):
 # --------------------------Screen_Scrolling-----------------------------------------------
 def scroll_screen_right():
     canvas.move('all',-BG_SPEED,0)
-    if canvas.coords('all')[0]<-2000:
+    if canvas.coords('all')[0]<-3000:
         canvas.coords('all',2000,0)
 
 def scroll_screen_left():
@@ -230,13 +229,13 @@ def levelOne(event):
     global player, displayTotalCash,fruit_id
     canvas.delete("all")
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
-    print(totalScore)
     canvas.create_image(600,280, image=bg_lvl1)
     canvas.create_image(1950,280, image=bg_lvl1)
     canvas.create_image(3300,280, image=bg_lvl1)
     player = canvas.create_image(50, 100, image=play)
 
     displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
+
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
