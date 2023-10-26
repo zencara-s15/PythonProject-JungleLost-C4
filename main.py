@@ -6,14 +6,13 @@ import time
 # player ----
 GRAVITY_FORCE = 10
 JUMP_FORCE = 35
-SPEED = 5
-BG_SPEED = 2
+SPEED = 4
+BG_SPEED = 3
 TIMED_LOOP = 5
 
 # enemy-move -----
 
 xMove = 5
-
 # press ------------- 
 keyPressed = []
 
@@ -135,6 +134,7 @@ rock_lvl2 = ImageTk.PhotoImage(rock_lvl2_size)
 # ---------------- this place for create enemies image for all lvl
 tiger_level1 = tk.PhotoImage(file="img/levelOne_image/tiger.png")
 rock_level1 = tk.PhotoImage(file="img/enemies/rock.png")
+lava_wall =  tk.PhotoImage(file="lava.png")
 
 # ---------------- this place for create fruits image for all lvl
 apple_level2_file = Image.open("img/fruits/apple.png")
@@ -190,15 +190,15 @@ def scroll_screen_left():
 
 
 # -------------------------lose---------------------
-
 # -----------------------------------PROCESS GAME-----------------------------------------------
+winning_fruit = 0
 def gameWin():
-    return True
+    winOne()
 
 def gameOver():
     loseOne()
 
-def winOne(event):
+def winOne():
     canvas.create_image(590,300, image=game_win)
     canvas.create_image(620,550, image=btn_back_game, tags="back1") 
 
@@ -273,7 +273,9 @@ def levelOne(event):
     enemies_id =canvas.create_image(2000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(3000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(3500,590, image=rock_level1, tags="ENEMIES")
-    
+
+    enemies_id =canvas.create_image(0,350, image=lava_wall, tags="ENEMIES")
+
 # ----------------------------------------------------------------------------------
 
     canvas.create_rectangle(0,650,3800,700,fill="White",tags="GROUND")
@@ -292,6 +294,7 @@ def levelTwo(event):
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+
     #_______________wall____________________________
     canvas.create_image(300, 150, image=grass_level2,  tags="GROUND")
     canvas.create_image(100, 400, image=grass_level2,  tags="GROUND")
