@@ -8,7 +8,7 @@ import time
 GRAVITY_FORCE = 10
 JUMP_FORCE = 35
 SPEED = 4
-BG_SPEED = 2
+BG_SPEED = 3
 TIMED_LOOP = 5
 totalScore = 0
 # enemy-move -----
@@ -67,15 +67,15 @@ ground = tk.PhotoImage(file="img/robar.png")
 # Show start game
 # CHARACTER test for all lvl
 
-play_file = Image.open("img/character/playerR.png")
+play_file = Image.open("img/character/player_right.png")
 play_size = play_file.resize((50, 50))
 play = ImageTk.PhotoImage(play_size)
 
-charR_file = Image.open("img/character/playerR.png")
+charR_file = Image.open("img/character/player_right.png")
 charR_size = charR_file.resize((50, 50))
 charR = ImageTk.PhotoImage(charR_size)
 
-charL_file = Image.open("img/character/playerL.png")
+charL_file = Image.open("img/character/player_left.png")
 charL_size = charL_file.resize((50, 50))
 charL = ImageTk.PhotoImage(charL_size)
 player = canvas.create_image(50, 650, image=play)
@@ -131,12 +131,12 @@ rock_lvl2_file = Image.open("img/menu/rock-stones.webp")
 rock_lvl2_size = rock_lvl2_file.resize((80,50))
 rock_lvl2 = ImageTk.PhotoImage(rock_lvl2_size)
 
-
+lava_wall =  tk.PhotoImage(file="lava.png")
 
 # ---------------- this place for create enemies image for all lvl
 tiger_level1 = tk.PhotoImage(file="img/levelOne_image/tiger.png")
 rock_level1 = tk.PhotoImage(file="img/enemies/rock.png")
-
+lava_wall =  tk.PhotoImage(file="lava.png")
 # ---------------- this place for create fruits image for all lvl
 apple_level2_file = Image.open("img/fruits/apple.png")
 apple_level2_size = apple_level2_file.resize((50,50))
@@ -192,12 +192,15 @@ def gameExit(event):
 
 # --------------------------Screen_Scrolling-----------------------------------------------
 def scroll_screen_right():
-    canvas.move('all',-BG_SPEED,0)
-    if canvas.coords('all')[0]<-2000:
-        canvas.coords('all',2000,0)
+    if canvas.coords(player)[0] < SCREEN_WIDTH and canvas.coords(player)[0] > SCREEN_WIDTH / 2:
+        print(canvas.coords(player)[0])
+        canvas.move('all',-BG_SPEED,0)
+
 
 def scroll_screen_left():
-    canvas.move('all',+BG_SPEED,0)
+    if canvas.coords(player)[0] > 0 and canvas.coords(player)[0] < SCREEN_WIDTH / 2:
+        print(canvas.coords(player)[0])
+        canvas.move('all',+BG_SPEED,0)
 
 # --------------------------win----------------------------
 def gameWin():
@@ -230,17 +233,20 @@ def levelOne(event):
     
     global player, displayTotalCash,fruit_id
     canvas.delete("all")
-    winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
-    print(totalScore)
-    canvas.create_image(600,280, image=bg_lvl1)
-    canvas.create_image(1950,280, image=bg_lvl1)
-    canvas.create_image(3300,280, image=bg_lvl1)
-    player = canvas.create_image(50, 100, image=play)
+    canvas.create_rectangle(0,600,10000,601,fill="red",tags="GROUND")
 
+    # sound
+    winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
+    # background
+    canvas.create_image(0,0, image=bg_lvl1,anchor=NW)
+    canvas.create_image(SCREEN_WIDTH,0, image=bg_lvl1,anchor=NW)
+    canvas.create_image(SCREEN_WIDTH*2,0, image=bg_lvl1,anchor=NW)
+    canvas.create_image(-700,0, image=bg_lvl1,anchor=NW)
+    # player 
+    player = canvas.create_image(50, 100, image=play)
+    # score 
     displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
-    scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
-    canvas.configure(xscrollcommand=scrollbar_bottom.set)
-    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+    
     
     #grass 
     canvas.create_image(100, 195, image=grass_level1, tags="GROUND")
@@ -295,28 +301,34 @@ def levelOne(event):
     enemies_id =canvas.create_image(2000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(3000,590, image=rock_level1, tags="ENEMIES")
     enemies_id =canvas.create_image(3500,590, image=rock_level1, tags="ENEMIES")
+
+    # lava_wall
+    enemies_id =canvas.create_image(-140,350, image=lava_wall, tags="ENEMIES")
+    enemies_id =canvas.create_image(-360,350, image=lava_wall, tags="ENEMIES")
+    enemies_id =canvas.create_image(4200,350, image=lava_wall, tags="ENEMIES")
     
 # ----------------------------------------------------------------------------------
 
-    canvas.create_rectangle(0,650,3800,700,fill="White",tags="GROUND")
 
 def levelTwo(event):
     global player,displayTotalCash
     canvas.delete("all")
 
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
+    # canvas.create_image(700,350, image=bg_lvl2,anchor=NW)
+    # canvas.create_image(2100,350, image=bg_lvl2,anchor=NW)
+    canvas.create_rectangle(0,650,3800,700,fill="white",tags="GROUND")
 
-    canvas.create_image(600,280, image=bg_lvl2)
-    canvas.create_image(1950,280, image=bg_lvl2)
-    canvas.create_image(3300,280, image=bg_lvl2)
-    canvas.create_rectangle(0,630,3800,700,fill="white",tags="GROUND")
+
+    canvas.create_image(600,350, image=bg_lvl2)
+    canvas.create_image(1950,350, image=bg_lvl2)
+    canvas.create_image(3300,350, image=bg_lvl2)
+    canvas.create_image(-700,0, image=bg_lvl2,anchor=NW)
+
     player = canvas.create_image(50, 100, image=play)
     # #scrollbar
     displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
 
-    scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
-    canvas.configure(xscrollcommand=scrollbar_bottom.set)
-    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
     #_______________wall____________________________
     canvas.create_image(300, 150, image=grass_level2,  tags="GROUND")
     canvas.create_image(100, 400, image=grass_level2,  tags="GROUND")
@@ -345,31 +357,35 @@ def levelTwo(event):
     canvas.create_image(3200, 150, image=grass_level2, tags="GROUND")
     canvas.create_image(3600, 150, image=grass_level2, tags="GROUND")
     
-    canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
-    canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
-    canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
-    canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
+#     canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
+#     canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
+#     canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
+#     canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
     
-# ----------------------------------------------------------------------------------
+# # ----------------------------------------------------------------------------------
 
     global enemies_id
-    #__tiger__
-    enemies_id =canvas.create_image(2450,465, image=tigerlvl2, tags = "ENEMIES")
-    enemies_id =canvas.create_image(80,600, image=tigerlvl2, tags = "ENEMIES")
-    enemies_id =canvas.create_image(750,465, image=tigerlvl2, tags = "ENEMIES")
-    enemies_id =canvas.create_image(3400,600, image=tigerlvl2, tags = "ENEMIES")
-    #__snak__
-    enemies_id =canvas.create_image(500,280, image = snak_lvl2, tags ="ENEMIES")
-    enemies_id =canvas.create_image(1850,275, image = snak_lvl2, tags ="ENEMIES")
-    enemies_id = canvas.create_image(3050,275, image = snak_lvl2, tags ="ENEMIES")
-    #___trap__
-    enemies_id =canvas.create_image(1200,130, image = trap_lvl2, tags ="ENEMIES")
-    enemies_id =canvas.create_image(2400,130, image = trap_lvl2, tags ="ENEMIES")
-    #____ROCK__
-    enemies_id =canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
-    enemies_id =canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
-    enemies_id =canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
-    enemies_id =canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
+#     #__tiger__
+#     enemies_id =canvas.create_image(2450,465, image=tigerlvl2, tags = "ENEMIES")
+#     enemies_id =canvas.create_image(80,600, image=tigerlvl2, tags = "ENEMIES")
+#     enemies_id =canvas.create_image(750,465, image=tigerlvl2, tags = "ENEMIES")
+#     enemies_id =canvas.create_image(3400,600, image=tigerlvl2, tags = "ENEMIES")
+#     #__snak__
+#     enemies_id =canvas.create_image(500,280, image = snak_lvl2, tags ="ENEMIES")
+#     enemies_id =canvas.create_image(1850,275, image = snak_lvl2, tags ="ENEMIES")
+#     enemies_id = canvas.create_image(3050,275, image = snak_lvl2, tags ="ENEMIES")
+#     #___trap__
+#     enemies_id =canvas.create_image(1200,130, image = trap_lvl2, tags ="ENEMIES")
+#     enemies_id =canvas.create_image(2400,130, image = trap_lvl2, tags ="ENEMIES")
+#     #____ROCK__
+#     enemies_id =canvas.create_image(350, 600, image =rock_lvl2, tags ="ENEMIES")
+#     enemies_id =canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
+#     enemies_id =canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
+#     enemies_id =canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
+
+    enemies_id =canvas.create_image(-140,350, image=lava_wall, tags="ENEMIES")
+    enemies_id =canvas.create_image(-360,350, image=lava_wall, tags="ENEMIES")
+    enemies_id =canvas.create_image(4300,350, image=lava_wall, tags="ENEMIES")
     
 # ----------------------------------------------------------------------------------
 # fiuits
@@ -443,7 +459,7 @@ def meet_enemies():
 def check_movement(dx=0, dy=0, checkGround=False):
     coord = canvas.coords(player)
     grounds = canvas.find_withtag("GROUND")
-    if coord[0] + dx - 15 < 0 or coord[0] + play.width() + dx > 2800:
+    if coord[0] + dx - 15 < 0 or coord[0] + play.width() + dx > SCREEN_WIDTH:
         return False
     if checkGround:
         overlap = canvas.find_overlapping(coord[0] , coord[1], coord[0] + dx + 50, coord[1] + dy + 15)
