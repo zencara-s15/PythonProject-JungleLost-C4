@@ -100,6 +100,18 @@ grass_lvl3_file=Image.open("img/menu/grassL3.png")
 grass_lvl3_size =grass_lvl3_file.resize((200,50))
 grass_lvl3 =ImageTk.PhotoImage(grass_lvl3_size)
 
+bird_level1_file=Image.open("img/levelOne_image/bird.png")
+bird_level1_size =bird_level1_file.resize((70,70))
+bird_level1 =ImageTk.PhotoImage(bird_level1_size)
+
+birds_level1_file=Image.open("img/levelOne_image/birds.png")
+birds_level1_size =birds_level1_file.resize((80,80))
+birds_level1 =ImageTk.PhotoImage(birds_level1_size)
+
+flower_level1_file=Image.open("img/levelOne_image/flower.png")
+flower_level1_size =flower_level1_file.resize((80,80))
+flower_level1 =ImageTk.PhotoImage(flower_level1_size)
+
 
 
 # ---------------- this place for create enemies image for all lvl
@@ -129,6 +141,10 @@ snak_lvl2_file =Image.open("img/enemies/snak.png")
 snak_lvl2_size = snak_lvl2_file.resize((50,50))
 snak_lvl2 =ImageTk.PhotoImage(snak_lvl2_size)
 
+snake_level3_file =Image.open("img/enemies/snak.png")
+snake_level3_size = snake_level3_file.resize((50,50))
+snake_level3 =ImageTk.PhotoImage(snake_level3_size)
+
 trap_lvl2_file = Image.open("img/enemies/trap.webp")
 trap_lvl2_size = trap_lvl2_file.resize((50,50))
 trap_lvl2 = ImageTk.PhotoImage(trap_lvl2_size)
@@ -137,18 +153,29 @@ rock_lvl2_file = Image.open("img/menu/rock-stones.webp")
 rock_lvl2_size = rock_lvl2_file.resize((80,50))
 rock_lvl2 = ImageTk.PhotoImage(rock_lvl2_size)
 
+rock_level3_file = Image.open("img/enemies/rock.png")
+rock_level3_size = rock_level3_file.resize((50,50))
+rock_level3 = ImageTk.PhotoImage(rock_lvl2_size)
+
 
 
 # ---------------- this place for create enemies image for all lvl
 tiger_level1 = tk.PhotoImage(file="img/levelOne_image/tiger.png")
 rock_level1 = tk.PhotoImage(file="img/enemies/rock.png")
 
+tiger_level3_file = Image.open("img/enemies/tiger.png")
+tiger_level3_size = tiger_level3_file.resize((95,95))
+tiger_level3 =ImageTk.PhotoImage(tiger_level3_size)
+
 # ---------------- this place for create fruits image for all lvl
 apple_level1 = tk.PhotoImage(file="img/fruits/apple.png")
 apple_level2_file = Image.open("img/fruits/apple.png")
 apple_level2_size = apple_level2_file.resize((50,50))
 apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
-# apple_level3 = tk.PhotoImage(file="img/fruits/apple.png")
+banana_level3_file = Image.open("img/fruits/b.png")
+banana_level3_size = banana_level3_file.resize((55,55))
+banana_level3 =ImageTk.PhotoImage(banana_level3_size)
+
 
 
 
@@ -251,6 +278,8 @@ def levelOne(event):
     canvas.create_image(3300, 400, image=grass_level1, tags="GROUND")
     canvas.create_image(3600, 250, image=grass_level1, tags="GROUND")
     canvas.create_image(3400, 500, image=grass_level1, tags="GROUND")
+    # bird
+    canvas.create_image(100, 120, image=bird_level1)
 
     # fiuits
    
@@ -333,6 +362,22 @@ def levelTwo(event):
     canvas.create_image(1350, 600, image =rock_lvl2, tags ="ENEMIES")
     canvas.create_image(2600, 600, image =rock_lvl2, tags ="ENEMIES")
     canvas.create_image(3400, 900, image =rock_lvl2, tags ="ENEMIES")
+    # bird
+    canvas.create_image(100, 80, image=bird_level1)
+    canvas.create_image(170, 100, image=bird_level1)
+    canvas.create_image(130, 120, image=bird_level1)
+    canvas.create_image(800, 90, image=bird_level1)
+    canvas.create_image(1500, 50, image=bird_level1)
+    canvas.create_image(2000, 90, image=bird_level1)
+    canvas.create_image(2500, 80, image=bird_level1)
+    canvas.create_image(2900, 60, image=bird_level1)
+    canvas.create_image(3200, 50, image=bird_level1)
+    canvas.create_image(3700, 300, image=bird_level1)
+
+    canvas.create_image(1300, 60, image=birds_level1)
+    canvas.create_image(2500, 60, image=birds_level1)
+    canvas.create_image(3000, 60, image=birds_level1)
+    canvas.create_image(3700, 65, image=birds_level1)
     
 # ----------------------------------------------------------------------------------
 
@@ -404,10 +449,36 @@ def levelThree(event):
 
     global fruit_id 
 
-    fruit_id=canvas.create_image(840,410, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
-    fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
+    fruit_id=canvas.create_image(1100,465, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(600,115, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(50,460, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(810,310, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(3045,115, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(3075,460, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(1640,120, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(3730,120, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(2400,460, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(2050,310, image=banana_level3, tags="FRUITS")
+    fruit_id=canvas.create_image(3700,470, image=banana_level3, tags="FRUITS")
+
+    global enemies_id
+
+    # tiger
+    enemies_id =canvas.create_image(120,590, image=tiger_level3, tags="ENEMIES")
+    enemies_id =canvas.create_image(2700,550, image=tiger_level3, tags="ENEMIES")
+    enemies_id =canvas.create_image(1300,560, image=tiger_level3, tags="ENEMIES")
+    enemies_id =canvas.create_image(3670,570, image=tiger_level3, tags="ENEMIES")
+    # rock
+    enemies_id =canvas.create_image(550,590, image=rock_level1, tags="ENEMIES")
+    enemies_id =canvas.create_image(1600,590, image=rock_level1, tags="ENEMIES")
+    enemies_id =canvas.create_image(2500,590, image=rock_level1, tags="ENEMIES")
+    enemies_id =canvas.create_image(3100,590, image=rock_level1, tags="ENEMIES")
+    # snake
+    enemies_id =canvas.create_image(150,460, image = snake_level3, tags ="ENEMIES")
+    enemies_id =canvas.create_image(1700,460, image = snake_level3, tags ="ENEMIES")
+    enemies_id =canvas.create_image(2700,295, image = snake_level3, tags ="ENEMIES")
+    enemies_id = canvas.create_image(3650,110, image = snake_level3, tags ="ENEMIES")
+    enemies_id = canvas.create_image(1760,120, image = snake_level3, tags ="ENEMIES")
 
     # player 
     player = canvas.create_image(50, 100, image=play)
