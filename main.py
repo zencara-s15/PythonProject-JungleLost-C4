@@ -10,7 +10,7 @@ JUMP_FORCE = 35
 SPEED = 4
 BG_SPEED = 2
 TIMED_LOOP = 5
-
+totalScore = 0
 # enemy-move -----
 
 xMove = 5
@@ -48,8 +48,8 @@ game_menu = tk.PhotoImage(file="img/menu-game.png")
 btn_start_game = tk.PhotoImage(file="img/menu/start.png")
 btn_exit_game = tk.PhotoImage(file="img/menu/exit.png")
 btn_help_game = tk.PhotoImage(file="img/menu/help.png")
-# btn_back_game = tk.PhotoImage(file="img/menu/back.png")
 btn_back_game = tk.PhotoImage(file="img/menu/come_back.png")
+btn_levle_back_game = tk.PhotoImage(file="img/menu/come_back.png")
 
 
 # ---------------------levelGame--------------------------
@@ -145,7 +145,6 @@ apple_leveL2 =ImageTk.PhotoImage(apple_level2_size)
 
 apple_level1 = tk.PhotoImage(file="img/fruits/apple.png")
 
-totalCash=0
 
 # #-------------------this place for creat key img all lvl
 # key_lvl2_file= Image.open("img/key.png")
@@ -161,8 +160,7 @@ def gameShow(event):
     canvas.create_image(630,280, image=btn_start_game, tags="startgame")
     canvas.create_image(630,540,image=btn_help_game, tags="help")
     canvas.create_image(630,410,image=btn_exit_game, tags="exit")
-    # totalCash =0 
-    # canvas.itemconfig(displayTotalCash, text=totalCash)
+
 
 
 
@@ -170,7 +168,6 @@ def gameShow(event):
 # show level game
 def levelGame(event):
     winsound.PlaySound("sounds/soun-level.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
-    canvas.delete(all)
     canvas.create_image(650,352, image=game_level)
     canvas.create_image(250,302, image=level1, tags="level1")
     canvas.create_image(640,302, image=level2, tags="level2")
@@ -192,11 +189,7 @@ def gameExit(event):
     window.destroy()
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
 
-# --------------------------win----------------------------
-def winOne(event):
-    canvas.create_image(590,300, image=game_win)
-    canvas.create_image(620,550, image=btn_back_game, tags="back1")
-    winsound.PlaySound("sounds/win.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+
 # --------------------------Screen_Scrolling-----------------------------------------------
 def scroll_screen_right():
     canvas.move('all',-BG_SPEED,0)
@@ -206,21 +199,26 @@ def scroll_screen_right():
 def scroll_screen_left():
     canvas.move('all',+BG_SPEED,0)
 
+# --------------------------win----------------------------
+def gameWin():
+    global totalScore
+    winOne()
+    winsound.PlaySound("sounds/win.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
+    totalScore =0 
+    canvas.itemconfig(displayTotalCash, text=totalScore)
+
+def winOne():
+    canvas.create_image(590,300, image=game_win)
+    canvas.create_image(620,550, image=btn_back_game, tags="back1")
 # -------------------------lose---------------------
 
 def gameOver():
-    global totalCash
+    global totalScore
     loseOne()
     winsound.PlaySound("sounds/over.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
-    totalCash =0 
-    canvas.itemconfig(displayTotalCash, text=totalCash)
+    totalScore =0 
+    canvas.itemconfig(displayTotalCash, text=totalScore)
     
-# ----------------------------------------------------------------------------------
-# -----------------------------------PROCESS GAME-----------------------------------------------
-def gameWin():
-    return True
-
-
 def loseOne():
     canvas.create_image(650,361,image=game_lose)
     canvas.create_image(640,550, image=btn_back_game, tags="back1")
@@ -229,16 +227,16 @@ def loseOne():
 
 
 def levelOne(event):
-    global player
+    global player, displayTotalCash,fruit_id
     canvas.delete("all")
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
-
+    print(totalScore)
     canvas.create_image(600,280, image=bg_lvl1)
     canvas.create_image(1950,280, image=bg_lvl1)
     canvas.create_image(3300,280, image=bg_lvl1)
     player = canvas.create_image(50, 100, image=play)
-    # #scrollbar
 
+    displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
@@ -276,6 +274,7 @@ def levelOne(event):
     fruit_id=canvas.create_image(3000,160, image=apple_level1, tags="FRUITS")
     fruit_id=canvas.create_image(1700,210, image=apple_level1, tags="FRUITS")
     fruit_id=canvas.create_image(2300,410, image=apple_level1, tags="FRUITS")
+
    
     
 # ----------------------------------------------------------------------------------
@@ -299,13 +298,11 @@ def levelOne(event):
 # ----------------------------------------------------------------------------------
 
     canvas.create_rectangle(0,650,3800,700,fill="White",tags="GROUND")
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 def levelTwo(event):
     global player,displayTotalCash
     canvas.delete("all")
 
-    
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
 
     canvas.create_image(600,280, image=bg_lvl2)
@@ -314,7 +311,8 @@ def levelTwo(event):
     canvas.create_rectangle(0,630,3800,700,fill="white",tags="GROUND")
     player = canvas.create_image(50, 100, image=play)
     # #scrollbar
-    displayTotalCash = canvas.create_text(700, 50, text=totalCash, font=("serif", 18 ,'bold'), fill="black")
+    displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
+
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
     scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
@@ -387,18 +385,22 @@ def levelTwo(event):
     # canvas.create_image(2950, 290, image= key_lvl2, tags="KEY") 
 
 def levelThree(event):  
+    global player,displayTotalCash
+
     canvas.delete("all")
-    global player
+    
     # canvas.create_image(700,350,image=bg)
     winsound.PlaySound("sounds/click.wav", winsound.SND_FILENAME)
 
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,700,2800,700,fill="black",tags="GROUND")
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
     #background L3
     canvas.create_image(600,300, image=bg_lvl3)
     canvas.create_image(1950,300, image=bg_lvl3)
     canvas.create_image(3300,300, image=bg_lvl3)
+
+    displayTotalCash = canvas.create_text(700, 50, text=totalScore, font=("serif", 18 ,'bold'), fill="black")
+
     #scrollbar
     scrollbar_bottom = tk.Scrollbar(window, orient='horizontal', command=canvas.xview)
     canvas.configure(xscrollcommand=scrollbar_bottom.set)
@@ -414,9 +416,7 @@ def levelThree(event):
     # player 
     player = canvas.create_image(50, 100, image=play)
     canvas.create_rectangle(0,620,3800,700,fill="black",tags="GROUND")
-
     # back btn 
-    canvas.create_image(140, 100, image=btn_back_game, tags="back")
 
 
 # FUNCTION__________________eat fruits 
@@ -455,15 +455,18 @@ def check_movement(dx=0, dy=0, checkGround=False):
         
     global fruit_id
     fruit_id = eat_fruit()
-
     if fruit_id > 0:
-        global totalCash
+        global totalScore
         coord = canvas.coords(fruit_id)
-        totalCash += 1
+        totalScore += 1
+        canvas.itemconfig(displayTotalCash, text=totalScore)
         canvas.delete(fruit_id)
-        canvas.itemconfig(displayTotalCash, text=totalCash)
         winsound.PlaySound("sounds/eat.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
-
+     
+        if totalScore ==8:
+            coord = canvas.coords(fruit_id)
+            gameWin()
+        # return True
 
     global enemies_id
     enemies_id = meet_enemies()
